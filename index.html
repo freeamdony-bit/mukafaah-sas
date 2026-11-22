@@ -21,7 +21,7 @@
       --text-muted: #475569;
       --line-soft: #e2e8f0;
     }
- 
+
     * {
       box-sizing: border-box;
     }
@@ -399,14 +399,6 @@
       background: #ccfbf1;
     }
 
-    .status-simpan {
-      margin-top: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--tosca-dark);
-      min-height: 20px;
-    }
-
     .hasil-box {
       display: none;
       margin-top: 30px;
@@ -593,6 +585,51 @@
       white-space: nowrap;
     }
 
+    .kirim-bendahara-box {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--tosca-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-kirim-bendahara {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(135deg, var(--tosca-dark), var(--tosca-main));
+      color: #ffffff;
+      border: none;
+      padding: 15px 24px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(15, 118, 110, 0.25);
+      transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .btn-kirim-bendahara:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.32);
+    }
+
+    .btn-kirim-bendahara:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      background: #64748b;
+      box-shadow: none;
+    }
+
+    .status-simpan {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--tosca-dark);
+      min-height: 22px;
+      text-align: center;
+    }
+
     .print-sign {
       display: none;
     }
@@ -632,7 +669,8 @@
       .top-bar,
       .form-input-area,
       .btn-print,
-      .summary-cards {
+      .summary-cards,
+      .kirim-bendahara-box {
         display: none !important;
       }
       .main-app {
@@ -804,7 +842,6 @@
             <button type="button" class="btn-submit" id="btnHitung">Hitung &amp; Tampilkan Rekap</button>
             <button type="button" class="btn-reset" id="btnReset">Reset Form</button>
           </div>
-          <div class="status-simpan" id="statusSimpan"></div>
         </div>
 
         <section class="hasil-box" id="hasilBox">
@@ -847,6 +884,15 @@
             </table>
           </div>
 
+          <div class="kirim-bendahara-box">
+            <button type="button" class="btn-kirim-bendahara" id="btnKirimBendahara">
+              📤 Kirim ke Bendahara
+            </button>
+            <div class="status-simpan" id="statusSimpan">
+              Periksa kembali data di atas sebelum diklik "Kirim ke Bendahara".
+            </div>
+          </div>
+
           <div class="print-sign">
             <div class="sign-col">
               <div>Mengetahui,</div>
@@ -867,7 +913,7 @@
   </div>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbsL02CGGpi-cGdMS4vK7rzwIdWnnHn41wjq4ibBaFS0g08XLU_9ykaXFZHrI8QQeD/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNBZE-LaZYEDahYjgsJytMQroKfUGxbr_VZF9iQoznm2Z_oOF-gN2hVamXy0D_Efxl/exec";
 
     const TARIF = {
       buat_soal: 45000,
@@ -878,6 +924,9 @@
       edit_packing: 170000,
       guru_pendamping: 150000
     };
+
+    let dataSiapKirim = null;
+    let sudahTerkirim = false;
 
     function masukDashboard() {
       const welcome = document.getElementById("welcomeScreen");
@@ -904,22 +953,53 @@
       return isNaN(nilai) || nilai < 0 ? 0 : nilai;
     }
 
-    async function kirimKeSheets(payload) {
+    function setTombolKirimState(terkirim, sedangProses = false) {
+      const btn = document.getElementById("btnKirimBendahara");
+      if (!btn) return;
+      if (sedangProses) {
+        btn.disabled = true;
+        btn.textContent = "⏳ Mengirim ke Bendahara...";
+      } else if (terkirim) {
+        btn.disabled = true;
+        btn.textContent = "✅ Sudah Terkirim ke Bendahara";
+      } else {
+        btn.disabled = false;
+        btn.textContent = "📤 Kirim ke Bendahara";
+      }
+    }
+
+    async function kirimKeBendahara() {
       const statusEl = document.getElementById("statusSimpan");
-      if (!APPS_SCRIPT_URL) return;
-      if (statusEl) statusEl.textContent = "Menyimpan rekap ke Google Sheets...";
+      if (!dataSiapKirim) {
+        if (statusEl) statusEl.textContent = "Silakan klik 'Hitung & Tampilkan Rekap' terlebih dahulu.";
+        return;
+      }
+      if (sudahTerkirim) {
+        if (statusEl) statusEl.textContent = "✅ Data ini sudah terkirim ke Bendahara.";
+        return;
+      }
+      if (!APPS_SCRIPT_URL) {
+        if (statusEl) statusEl.textContent = "⚠️ URL Google Sheets belum dikonfigurasi.";
+        return;
+      }
+
+      setTombolKirimState(false, true);
+      if (statusEl) statusEl.textContent = "Mengirim data rekap ke Google Sheets Bendahara...";
 
       try {
         await fetch(APPS_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(dataSiapKirim)
         });
-        if (statusEl) statusEl.textContent = "✅ Rekap berhasil dikirim ke Google Sheets.";
+        sudahTerkirim = true;
+        setTombolKirimState(true, false);
+        if (statusEl) statusEl.textContent = "✅ Rekap berhasil dikirim ke Bendahara (tersimpan di Google Sheets).";
       } catch (err) {
         console.error("Gagal kirim ke Google Sheets:", err);
-        if (statusEl) statusEl.textContent = "⚠️ Rekap tampil di layar, namun gagal mengirim ke Google Sheets.";
+        setTombolKirimState(false, false);
+        if (statusEl) statusEl.textContent = "⚠️ Gagal mengirim ke Google Sheets. Silakan coba klik Kirim ke Bendahara lagi.";
       }
     }
 
@@ -982,11 +1062,7 @@
       document.getElementById("tabelBody").innerHTML = htmlRows;
       document.getElementById("totalRupiah").textContent = formatRupiah(total);
 
-      const hasilEl = document.getElementById("hasilBox");
-      hasilEl.style.display = "block";
-      hasilEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-
-      kirimKeSheets({
+      dataSiapKirim = {
         nama,
         jabatan,
         wa,
@@ -1000,7 +1076,14 @@
         edit_packing: editPacking,
         guru_pendamping: guruPendamping,
         total_mukafaah: total
-      });
+      };
+      sudahTerkirim = false;
+      setTombolKirimState(false, false);
+      document.getElementById("statusSimpan").textContent = "Periksa kembali data di atas sebelum diklik \"Kirim ke Bendahara\".";
+
+      const hasilEl = document.getElementById("hasilBox");
+      hasilEl.style.display = "block";
+      hasilEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
     function cetakRekap() {
@@ -1014,6 +1097,9 @@
       ["buat_soal", "koreksi_soal", "awas_praktek", "awas_ruang", "isi_raport", "edit_packing", "guru_pendamping"].forEach((id) => {
         document.getElementById(id).value = 0;
       });
+      dataSiapKirim = null;
+      sudahTerkirim = false;
+      setTombolKirimState(false, false);
       document.getElementById("hasilBox").style.display = "none";
       document.getElementById("statusSimpan").textContent = "";
     }
@@ -1022,6 +1108,7 @@
     document.getElementById("btnKembali").addEventListener("click", kembaliSambutan);
     document.getElementById("btnHitung").addEventListener("click", hitungMukafaah);
     document.getElementById("btnReset").addEventListener("click", resetForm);
+    document.getElementById("btnKirimBendahara").addEventListener("click", kirimKeBendahara);
     document.getElementById("btnPrint").addEventListener("click", cetakRekap);
   </script>
 </body>
