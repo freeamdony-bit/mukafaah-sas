@@ -697,7 +697,7 @@
 
         <p class="salam-penutup">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
 
-        <button type="button" class="btn-masuk" id="btnMasuk">Masuk</button> 
+        <button type="button" class="btn-masuk" id="btnMasuk">Masuk</button>
       </div>
     </div>
   </section>
@@ -887,3 +887,87 @@
     function formatRupiah(angka) {
       return "Rp " + Number(angka || 0).toLocaleString("id-ID");
     }
+
+    function ambilAngka(id) {
+      const nilai = parseFloat(document.getElementById(id).value);
+      return isNaN(nilai) || nilai < 0 ? 0 : nilai;
+    }
+
+    function hitungMukafaah() {
+      const nama = document.getElementById("nama").value.trim() || "-";
+      const jabatan = document.getElementById("jabatan").value.trim() || "-";
+      const wa = document.getElementById("wa").value.trim() || "-";
+      const bank = document.getElementById("jenis_bank").value.trim() || "-";
+      const rekening = document.getElementById("rekening").value.trim() || "-";
+
+      const items = [
+        { label: "Pembuat Soal", jumlah: ambilAngka("buat_soal"), tarif: TARIF.buat_soal },
+        { label: "Mengoreksi Soal", jumlah: ambilAngka("koreksi_soal"), tarif: TARIF.koreksi_soal },
+        { label: "Mengawas Praktek", jumlah: ambilAngka("awas_praktek"), tarif: TARIF.awas_praktek },
+        { label: "Mengawas Ruangan", jumlah: ambilAngka("awas_ruang"), tarif: TARIF.awas_ruang },
+        { label: "Mengisi Rapor", jumlah: ambilAngka("isi_raport"), tarif: TARIF.isi_raport },
+        { label: "Editing Soal dan Packing", jumlah: ambilAngka("edit_packing"), tarif: TARIF.edit_packing },
+        { label: "Guru Pendamping", jumlah: ambilAngka("guru_pendamping"), tarif: TARIF.guru_pendamping }
+      ];
+
+      let total = 0;
+      let aktifCount = 0;
+      let htmlRows = "";
+
+      items.forEach((item, index) => {
+        const subtotal = item.jumlah * item.tarif;
+        total += subtotal;
+        if (item.jumlah > 0) {
+          aktifCount += 1;
+        }
+        htmlRows += `
+          <tr>
+            <td class="col-no">${index + 1}</td>
+            <td class="col-ket">${item.label}</td>
+            <td class="col-qty">${item.jumlah}</td>
+            <td class="col-nominal">${formatRupiah(item.tarif)}</td>
+            <td class="col-total">${formatRupiah(subtotal)}</td>
+          </tr>
+        `;
+      });
+
+      document.getElementById("infoPegawai").innerHTML = `
+        <div><strong>Nama:</strong> ${nama}</div>
+        <div><strong>Jabatan:</strong> ${jabatan}</div>
+        <div><strong>No. WA:</strong> ${wa}</div>
+        <div><strong>Bank &amp; No. Rek:</strong> ${bank} - ${rekening}</div>
+      `;
+
+      document.getElementById("ttdNama").textContent = nama !== "-" ? `(${nama})` : "(........................................)";
+      document.getElementById("totalItemAktif").textContent = `${aktifCount} / ${items.length} Jenis Kegiatan`;
+      document.getElementById("ringkasanRupiah").textContent = formatRupiah(total);
+      document.getElementById("tabelBody").innerHTML = htmlRows;
+      document.getElementById("totalRupiah").textContent = formatRupiah(total);
+
+      const hasilEl = document.getElementById("hasilBox");
+      hasilEl.style.display = "block";
+      hasilEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function cetakRekap() {
+      window.print();
+    }
+
+    function resetForm() {
+      ["nama", "jabatan", "wa", "jenis_bank", "rekening"].forEach((id) => {
+        document.getElementById(id).value = "";
+      });
+      ["buat_soal", "koreksi_soal", "awas_praktek", "awas_ruang", "isi_raport", "edit_packing", "guru_pendamping"].forEach((id) => {
+        document.getElementById(id).value = 0;
+      });
+      document.getElementById("hasilBox").style.display = "none";
+    }
+
+    document.getElementById("btnMasuk").addEventListener("click", masukDashboard);
+    document.getElementById("btnKembali").addEventListener("click", kembaliSambutan);
+    document.getElementById("btnHitung").addEventListener("click", hitungMukafaah);
+    document.getElementById("btnReset").addEventListener("click", resetForm);
+    document.getElementById("btnPrint").addEventListener("click", cetakRekap);
+  </script>
+</body>
+</html>
