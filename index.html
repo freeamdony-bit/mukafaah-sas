@@ -36,7 +36,6 @@
       line-height: 1.55;
     }
 
-    /* ================= TAMPILAN AWAL (WELCOME SCREEN) ================= */
     .welcome-screen {
       min-height: calc(100vh - 76px);
       display: flex;
@@ -189,7 +188,6 @@
       box-shadow: 0 14px 28px rgba(234, 88, 12, 0.26);
     }
 
-    /* ================= TAMPILAN KEDUA (DASHBOARD & FORM) ================= */
     .main-app {
       display: none;
     }
@@ -401,7 +399,6 @@
       background: #ccfbf1;
     }
 
-    /* ================= HASIL REKAPITULASI (TABEL) ================= */
     .hasil-box {
       display: none;
       margin-top: 30px;
@@ -615,7 +612,6 @@
       }
     }
 
-    /* ================= PENGATURAN CETAK / SIMPAN PDF ================= */
     @media print {
       body {
         background: #ffffff !important;
@@ -676,7 +672,6 @@
   </style>
 </head>
 <body>
-  <!-- ================= TAMPILAN AWAL ================= -->
   <section class="welcome-screen" id="welcomeScreen">
     <div class="welcome-card">
       <div class="welcome-banner">
@@ -702,16 +697,15 @@
 
         <p class="salam-penutup">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
 
-        <button type="button" class="btn-masuk" onclick="masukDashboard()">Masuk</button>
+        <button type="button" class="btn-masuk" id="btnMasuk">Masuk</button>
       </div>
     </div>
   </section>
 
-  <!-- ================= TAMPILAN KEDUA (DASHBOARD) ================= -->
   <div class="main-app" id="mainApp">
     <div class="wrapper">
       <div class="top-bar">
-        <button type="button" class="btn-kembali" onclick="kembaliSambutan()">← Kembali ke Halaman Sambutan</button>
+        <button type="button" class="btn-kembali" id="btnKembali">← Kembali ke Halaman Sambutan</button>
       </div>
 
       <header class="header-card">
@@ -799,15 +793,15 @@
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn-submit" onclick="hitungMukafaah()">Hitung &amp; Tampilkan Rekap</button>
-            <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+            <button type="button" class="btn-submit" id="btnHitung">Hitung &amp; Tampilkan Rekap</button>
+            <button type="button" class="btn-reset" id="btnReset">Reset Form</button>
           </div>
         </div>
 
         <section class="hasil-box" id="hasilBox">
           <div class="hasil-header">
             <h2>Rekapitulasi Mukafaah SAS — Tp. 2026/2027</h2>
-            <button type="button" class="btn-print" onclick="cetakRekap()">🖨️ Print / Simpan PDF</button>
+            <button type="button" class="btn-print" id="btnPrint">🖨️ Print / Simpan PDF</button>
           </div>
 
           <div class="summary-cards">
@@ -846,4 +840,50 @@
 
           <div class="print-sign">
             <div class="sign-col">
-              <div>
+              <div>Mengetahui,</div>
+              <div>Bendahara / Panitia SAS</div>
+              <div class="sign-space"></div>
+              <div>(........................................)</div>
+            </div>
+            <div class="sign-col">
+              <div>Tangerang, ......................</div>
+              <div>Penerima Mukafaah</div>
+              <div class="sign-space"></div>
+              <div id="ttdNama">(........................................)</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const TARIF = {
+      buat_soal: 45000,
+      koreksi_soal: 3000,
+      awas_praktek: 2000,
+      awas_ruang: 17000,
+      isi_raport: 10000,
+      edit_packing: 170000,
+      guru_pendamping: 150000
+    };
+
+    function masukDashboard() {
+      const welcome = document.getElementById("welcomeScreen");
+      const mainApp = document.getElementById("mainApp");
+      if (welcome) welcome.style.display = "none";
+      if (mainApp) mainApp.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function kembaliSambutan() {
+      const welcome = document.getElementById("welcomeScreen");
+      const mainApp = document.getElementById("mainApp");
+      if (mainApp) mainApp.style.display = "none";
+      if (welcome) welcome.style.display = "flex";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function formatRupiah(angka) {
+      return "Rp " + Number(angka || 0).toLocaleString("id-ID");
+    }
