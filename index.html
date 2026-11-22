@@ -328,21 +328,32 @@
       color: var(--text-main);
     }
 
-    input {
+    input,
+    select {
       width: 100%;
       padding: 12px 14px;
       border: 1.5px solid #cbd5e1;
       border-radius: 10px;
       font-size: 16px;
       color: var(--text-main);
-      background: #ffffff;
+      background-color: #ffffff;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    input:focus {
+    select {
+      cursor: pointer;
+    }
+
+    input:focus,
+    select:focus {
       outline: none;
       border-color: var(--tosca-main);
       box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    .jabatan-custom-wrap {
+      display: none;
+      margin-top: 10px;
     }
 
     .grid-2 {
@@ -774,28 +785,59 @@
           </div>
 
           <div class="field">
-            <label>1. Nama</label>
+            <label for="nama">1. Nama</label>
             <input type="text" id="nama" placeholder="Contoh: Upik Butsiani, S.Psi" />
           </div>
 
           <div class="field">
-            <label>2. Wali Kelas / Guru Bidang</label>
-            <input type="text" id="jabatan" placeholder="Contoh: Wali Kelas 1A / Guru Matematika" />
+            <label for="jabatan">2. Wali Kelas / Guru Bidang</label>
+            <select id="jabatan">
+              <option value="" disabled selected>-- Pilih Wali Kelas / Guru Bidang --</option>
+              <optgroup label="Wali Kelas">
+                <option value="Wali Kelas 1A">Wali Kelas 1A</option>
+                <option value="Wali Kelas 1B">Wali Kelas 1B</option>
+                <option value="Wali Kelas 2A">Wali Kelas 2A</option>
+                <option value="Wali Kelas 2B">Wali Kelas 2B</option>
+                <option value="Wali Kelas 3A">Wali Kelas 3A</option>
+                <option value="Wali Kelas 3B">Wali Kelas 3B</option>
+                <option value="Wali Kelas 4A">Wali Kelas 4A</option>
+                <option value="Wali Kelas 4B">Wali Kelas 4B</option>
+                <option value="Wali Kelas 5A">Wali Kelas 5A</option>
+                <option value="Wali Kelas 5B">Wali Kelas 5B</option>
+                <option value="Wali Kelas 6A">Wali Kelas 6A</option>
+                <option value="Wali Kelas 6B">Wali Kelas 6B</option>
+              </optgroup>
+              <optgroup label="Guru Bidang">
+                <option value="Guru Matematika">Guru Matematika</option>
+                <option value="Guru Kecerdasan Artifisial (KKA)">Guru Kecerdasan Artifisial (KKA)</option>
+                <option value="Guru Pendidikan Pancasila">Guru Pendidikan Pancasila</option>
+                <option value="Guru Bahasa Indonesia">Guru Bahasa Indonesia</option>
+                <option value="Guru IPAS">Guru IPAS</option>
+                <option value="Guru Bahasa Inggris">Guru Bahasa Inggris</option>
+                <option value="Guru PAI / Tahfidz">Guru PAI / Tahfidz</option>
+                <option value="Guru PJOK">Guru PJOK</option>
+                <option value="Guru Seni / Ekstrakurikuler">Guru Seni / Ekstrakurikuler</option>
+              </optgroup>
+              <option value="__lainnya__">Lainnya (Ketik Manual)</option>
+            </select>
+            <div class="jabatan-custom-wrap" id="jabatanCustomWrap">
+              <input type="text" id="jabatanCustom" placeholder="Tuliskan jabatan / guru bidang..." />
+            </div>
           </div>
 
           <div class="grid-2">
             <div class="field">
-              <label>3. Nomor WA</label>
+              <label for="wa">3. Nomor WA</label>
               <input type="text" id="wa" placeholder="Contoh: 0812xxxxxxxx" />
             </div>
             <div class="field">
-              <label>Jenis Bank</label>
+              <label for="jenis_bank">Jenis Bank</label>
               <input type="text" id="jenis_bank" placeholder="Contoh: BSI / BCA / BRI / Mandiri" />
             </div>
           </div>
 
           <div class="field">
-            <label>4. Nomor Rekening</label>
+            <label for="rekening">4. Nomor Rekening</label>
             <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
           </div>
 
@@ -808,33 +850,33 @@
 
           <div class="grid-2">
             <div class="field">
-              <label>5. Membuat soal sebanyak</label>
+              <label for="buat_soal">5. Membuat soal sebanyak</label>
               <input type="number" id="buat_soal" min="0" value="0" />
             </div>
             <div class="field">
-              <label>6. Mengoreksi soal sebanyak (siswa)</label>
+              <label for="koreksi_soal">6. Mengoreksi soal sebanyak (siswa)</label>
               <input type="number" id="koreksi_soal" min="0" value="0" />
             </div>
             <div class="field">
-              <label>7. Mengawas praktek sebanyak (siswa)</label>
+              <label for="awas_praktek">7. Mengawas praktek sebanyak (siswa)</label>
               <input type="number" id="awas_praktek" min="0" value="0" />
             </div>
             <div class="field">
-              <label>8. Mengawas ruangan sebanyak</label>
+              <label for="awas_ruang">8. Mengawas ruangan sebanyak</label>
               <input type="number" id="awas_ruang" min="0" value="0" />
             </div>
             <div class="field">
-              <label>9. Mengisi raport sebanyak (siswa)</label>
+              <label for="isi_raport">9. Mengisi raport sebanyak (siswa)</label>
               <input type="number" id="isi_raport" min="0" value="0" />
             </div>
             <div class="field">
-              <label>10. Editing soal dan Packing (rombel)</label>
+              <label for="edit_packing">10. Editing soal dan Packing (rombel)</label>
               <input type="number" id="edit_packing" min="0" value="0" />
             </div>
           </div>
 
           <div class="field">
-            <label>11. Guru Pendamping</label>
+            <label for="guru_pendamping">11. Guru Pendamping</label>
             <input type="number" id="guru_pendamping" min="0" value="0" />
           </div>
 
@@ -913,7 +955,7 @@
   </div>
 
   <script>
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbsL02CGGpi-cGdMS4vK7rzwIdWnnHn41wjq4ibBaFS0g08XLU_9ykaXFZHrI8QQeD/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNBZE-LaZYEDahYjgsJytMQroKfUGxbr_VZF9iQoznm2Z_oOF-gN2hVamXy0D_Efxl/exec";
 
     const TARIF = {
       buat_soal: 45000,
@@ -942,6 +984,31 @@
       if (mainApp) mainApp.style.display = "none";
       if (welcome) welcome.style.display = "flex";
       window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function toggleJabatanCustom() {
+      const selectEl = document.getElementById("jabatan");
+      const wrapEl = document.getElementById("jabatanCustomWrap");
+      const customEl = document.getElementById("jabatanCustom");
+      if (!selectEl || !wrapEl || !customEl) return;
+
+      if (selectEl.value === "__lainnya__") {
+        wrapEl.style.display = "block";
+        customEl.focus();
+      } else {
+        wrapEl.style.display = "none";
+        customEl.value = "";
+      }
+    }
+
+    function ambilJabatan() {
+      const selectEl = document.getElementById("jabatan");
+      const customEl = document.getElementById("jabatanCustom");
+      if (!selectEl) return "-";
+      if (selectEl.value === "__lainnya__") {
+        return (customEl && customEl.value.trim()) || "-";
+      }
+      return selectEl.value || "-";
     }
 
     function formatRupiah(angka) {
@@ -1005,7 +1072,7 @@
 
     function hitungMukafaah() {
       const nama = document.getElementById("nama").value.trim() || "-";
-      const jabatan = document.getElementById("jabatan").value.trim() || "-";
+      const jabatan = ambilJabatan();
       const wa = document.getElementById("wa").value.trim() || "-";
       const bank = document.getElementById("jenis_bank").value.trim() || "-";
       const rekening = document.getElementById("rekening").value.trim() || "-";
@@ -1091,9 +1158,11 @@
     }
 
     function resetForm() {
-      ["nama", "jabatan", "wa", "jenis_bank", "rekening"].forEach((id) => {
+      ["nama", "wa", "jenis_bank", "rekening", "jabatanCustom"].forEach((id) => {
         document.getElementById(id).value = "";
       });
+      document.getElementById("jabatan").value = "";
+      document.getElementById("jabatanCustomWrap").style.display = "none";
       ["buat_soal", "koreksi_soal", "awas_praktek", "awas_ruang", "isi_raport", "edit_packing", "guru_pendamping"].forEach((id) => {
         document.getElementById(id).value = 0;
       });
@@ -1106,6 +1175,7 @@
 
     document.getElementById("btnMasuk").addEventListener("click", masukDashboard);
     document.getElementById("btnKembali").addEventListener("click", kembaliSambutan);
+    document.getElementById("jabatan").addEventListener("change", toggleJabatanCustom);
     document.getElementById("btnHitung").addEventListener("click", hitungMukafaah);
     document.getElementById("btnReset").addEventListener("click", resetForm);
     document.getElementById("btnKirimBendahara").addEventListener("click", kirimKeBendahara);
