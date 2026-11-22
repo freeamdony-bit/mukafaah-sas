@@ -8,6 +8,7 @@
     :root {
       --tosca-dark: #0f766e;
       --tosca-main: #0d9488;
+      --tosca-light: #14b8a6;
       --tosca-soft: #f0fdfa;
       --tosca-border: #99f6e4;
       --orange-main: #ea580c;
@@ -32,12 +33,192 @@
       margin: 0;
       padding: 28px 16px 48px;
       font-size: 16px;
-      line-height: 1.5;
+      line-height: 1.55;
+    }
+
+    /* ================= TAMPILAN AWAL (WELCOME SCREEN) ================= */
+    .welcome-screen {
+      min-height: calc(100vh - 76px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome-card {
+      width: 100%;
+      max-width: 780px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(15, 118, 110, 0.14);
+      border: 1px solid rgba(13, 148, 136, 0.18);
+    }
+
+    .welcome-banner {
+      background: linear-gradient(125deg, #0b5c55 0%, var(--tosca-dark) 52%, var(--orange-main) 100%);
+      padding: 32px 36px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      position: relative;
+    }
+
+    .welcome-banner::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--tosca-light), var(--orange-main));
+    }
+
+    .welcome-logo {
+      width: 88px;
+      height: 88px;
+      min-width: 88px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .welcome-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .welcome-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
+      color: #fff7ed;
+    }
+
+    .welcome-banner h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .welcome-banner .school-sub {
+      margin: 5px 0 2px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffedd5;
+    }
+
+    .welcome-banner .tp-sub {
+      margin: 0;
+      font-size: 14px;
+      color: #ccfbf1;
+      font-weight: 600;
+    }
+
+    .welcome-body {
+      padding: 34px 36px 36px;
+      background: radial-gradient(circle at top right, rgba(255, 237, 213, 0.55), transparent 42%),
+                  radial-gradient(circle at bottom left, rgba(240, 253, 250, 0.9), transparent 48%),
+                  #ffffff;
+    }
+
+    .salam-pembuka {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--tosca-dark);
+      margin: 0 0 18px;
+      padding-left: 14px;
+      border-left: 4px solid var(--orange-main);
+    }
+
+    .pesan-utama {
+      margin: 0 0 22px;
+      font-size: 16.5px;
+      color: var(--text-main);
+      text-align: justify;
+    }
+
+    .doa-box {
+      background: var(--tosca-soft);
+      border: 1px solid var(--tosca-border);
+      border-left: 4px solid var(--tosca-main);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      font-weight: 700;
+      color: var(--tosca-dark);
+      font-size: 16px;
+    }
+
+    .salam-penutup {
+      margin: 0 0 28px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--orange-hover);
+    }
+
+    .btn-masuk {
+      width: 100%;
+      background: linear-gradient(135deg, var(--tosca-dark) 0%, var(--tosca-main) 55%, var(--orange-main) 100%);
+      color: #ffffff;
+      border: none;
+      padding: 16px 26px;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.24);
+      transition: transform 0.18s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-masuk:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(234, 88, 12, 0.26);
+    }
+
+    /* ================= TAMPILAN KEDUA (DASHBOARD & FORM) ================= */
+    .main-app {
+      display: none;
     }
 
     .wrapper {
       max-width: 920px;
       margin: 0 auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .btn-kembali {
+      background: #ffffff;
+      color: var(--tosca-dark);
+      border: 1.5px solid var(--tosca-border);
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-kembali:hover {
+      background: var(--tosca-soft);
     }
 
     .header-card {
@@ -344,13 +525,18 @@
     }
 
     @media (max-width: 680px) {
+      .welcome-banner,
       .header-card {
         flex-direction: column;
         text-align: center;
         padding: 24px 20px;
       }
+      .welcome-body,
       .dashboard-card {
         padding: 22px 18px;
+      }
+      .pesan-utama {
+        text-align: left;
       }
       .grid-2,
       .summary-cards,
@@ -368,123 +554,173 @@
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <header class="header-card">
-      <div class="logo-box">
-        <img src="Logo vektor.png" alt="Logo SDIT Alia Nurul Jihadi" />
-      </div>
-      <div class="header-title-group">
-        <div class="badge">Dashboard Administrasi Keuangan</div>
-        <h1>Rekapitulasi Mukafaah Sumatif Akhir Semester</h1>
-        <div class="school-name">SDIT ALIA NURUL JIHADI</div>
-        <div class="tp-text">Tp. 2026/2027</div>
-      </div>
-    </header>
-
-    <main class="dashboard-card">
-      <div class="section-title">
-        <span>Data Pegawai &amp; Rekening</span>
-        <span class="tag-orange">Wajib Diisi</span>
+  <!-- ================= TAMPILAN AWAL ================= -->
+  <section class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-card">
+      <div class="welcome-banner">
+        <div class="welcome-logo">
+          <img src="Logo vektor.png" alt="Logo SDIT Alia Nurul Jihadi" />
+        </div>
+        <div>
+          <div class="welcome-pill">Portal Resmi Rekapitulasi SAS</div>
+          <h1>Rekapitulasi Mukafaah Sumatif Akhir Semester</h1>
+          <div class="school-sub">SDIT ALIA NURUL JIHADI</div>
+          <div class="tp-sub">Tp. 2026/2027</div>
+        </div>
       </div>
 
-      <div class="field">
-        <label>1. Nama</label>
-        <input type="text" id="nama" placeholder="Contoh: Upik Butsiani, S.Psi" />
+      <div class="welcome-body">
+        <p class="salam-pembuka">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+
+        <p class="pesan-utama">
+          Ustadz/Ustadzah yang semoga Allah Ta'ala muliakan dan jaga di mana pun berada. Ahlan wa sahlan di portal Rekapitulasi Mukafaah Sumatif Akhir Semester (SAS) TP. 2026/2027. Silakan lengkapi data dan rincian tugas Ustadz/Ustadzah untuk melihat perhitungan mukafaah secara otomatis. Semoga Allah Azza wa Jalla memudahkan setiap amanah dan ikhtiar Ustadz/Ustadzah dalam mendidik serta menyukseskan kegiatan SAS.
+        </p>
+
+        <div class="doa-box">Baarakallahu fiikum</div>
+
+        <p class="salam-penutup">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+
+        <button type="button" class="btn-masuk" onclick="masukDashboard()">Masuk</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAMPILAN KEDUA (DASHBOARD) ================= -->
+  <div class="main-app" id="mainApp">
+    <div class="wrapper">
+      <div class="top-bar">
+        <button type="button" class="btn-kembali" onclick="kembaliSambutan()">← Kembali ke Halaman Sambutan</button>
       </div>
 
-      <div class="field">
-        <label>2. Wali Kelas / Guru Bidang</label>
-        <input type="text" id="jabatan" placeholder="Contoh: Wali Kelas 1A / Guru Matematika" />
-      </div>
+      <header class="header-card">
+        <div class="logo-box">
+          <img src="Logo vektor.png" alt="Logo SDIT Alia Nurul Jihadi" />
+        </div>
+        <div class="header-title-group">
+          <div class="badge">Dashboard Administrasi Keuangan</div>
+          <h1>Rekapitulasi Mukafaah Sumatif Akhir Semester</h1>
+          <div class="school-name">SDIT ALIA NURUL JIHADI</div>
+          <div class="tp-text">Tp. 2026/2027</div>
+        </div>
+      </header>
 
-      <div class="grid-2">
+      <main class="dashboard-card">
+        <div class="section-title">
+          <span>Data Pegawai &amp; Rekening</span>
+          <span class="tag-orange">Wajib Diisi</span>
+        </div>
+
         <div class="field">
-          <label>3. Nomor WA</label>
-          <input type="text" id="wa" placeholder="Contoh: 0812xxxxxxxx" />
+          <label>1. Nama</label>
+          <input type="text" id="nama" placeholder="Contoh: Upik Butsiani, S.Psi" />
         </div>
+
         <div class="field">
-          <label>Jenis Bank</label>
-          <input type="text" id="jenis_bank" placeholder="Contoh: BSI / BCA / BRI / Mandiri" />
-        </div>
-      </div>
-
-      <div class="field">
-        <label>4. Nomor Rekening</label>
-        <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
-      </div>
-
-      <hr class="divider" />
-
-      <div class="section-title">
-        <span>Rincian Beban Kerja SAS</span>
-        <span class="tag-orange">Hitung Otomatis</span>
-      </div>
-
-      <div class="grid-2">
-        <div class="field">
-          <label>5. Membuat soal sebanyak</label>
-          <input type="number" id="buat_soal" min="0" value="0" />
-        </div>
-        <div class="field">
-          <label>6. Mengoreksi soal sebanyak (siswa)</label>
-          <input type="number" id="koreksi_soal" min="0" value="0" />
-        </div>
-        <div class="field">
-          <label>7. Mengawas praktek sebanyak (siswa)</label>
-          <input type="number" id="awas_praktek" min="0" value="0" />
-        </div>
-        <div class="field">
-          <label>8. Mengawas ruangan sebanyak</label>
-          <input type="number" id="awas_ruang" min="0" value="0" />
-        </div>
-        <div class="field">
-          <label>9. Mengisi raport sebanyak (siswa)</label>
-          <input type="number" id="isi_raport" min="0" value="0" />
-        </div>
-        <div class="field">
-          <label>10. Editing soal dan Packing (rombel)</label>
-          <input type="number" id="edit_packing" min="0" value="0" />
-        </div>
-      </div>
-
-      <div class="field">
-        <label>11. Guru Pendamping</label>
-        <input type="number" id="guru_pendamping" min="0" value="0" />
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn-submit" onclick="hitungMukafaah()">Hitung &amp; Tampilkan Rekap</button>
-        <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
-      </div>
-
-      <section class="hasil-box" id="hasilBox">
-        <div class="hasil-header">
-          <h2>Rekapitulasi Mukafaah SAS — Tp. 2026/2027</h2>
+          <label>2. Wali Kelas / Guru Bidang</label>
+          <input type="text" id="jabatan" placeholder="Contoh: Wali Kelas 1A / Guru Matematika" />
         </div>
 
-        <div class="summary-cards">
-          <div class="stat-card accent-tosca">
-            <div class="stat-label">Total Item Kegiatan Terhitung</div>
-            <div class="stat-value" id="totalItemAktif">0 Kegiatan</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>3. Nomor WA</label>
+            <input type="text" id="wa" placeholder="Contoh: 0812xxxxxxxx" />
           </div>
-          <div class="stat-card accent-orange">
-            <div class="stat-label">Estimasi Penerimaan Mukafaah</div>
-            <div class="stat-value" id="ringkasanRupiah">Rp 0</div>
+          <div class="field">
+            <label>Jenis Bank</label>
+            <input type="text" id="jenis_bank" placeholder="Contoh: BSI / BCA / BRI / Mandiri" />
           </div>
         </div>
 
-        <div class="info-grid" id="infoPegawai"></div>
-        <div class="rincian-list" id="rincianList"></div>
-
-        <div class="total-box">
-          <span class="label-total">Total Mukafaah Diterima</span>
-          <span class="nominal-total" id="totalRupiah">Rp 0</span>
+        <div class="field">
+          <label>4. Nomor Rekening</label>
+          <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
         </div>
-      </section>
-    </main>
+
+        <hr class="divider" />
+
+        <div class="section-title">
+          <span>Rincian Beban Kerja SAS</span>
+          <span class="tag-orange">Hitung Otomatis</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>5. Membuat soal sebanyak</label>
+            <input type="number" id="buat_soal" min="0" value="0" />
+          </div>
+          <div class="field">
+            <label>6. Mengoreksi soal sebanyak (siswa)</label>
+            <input type="number" id="koreksi_soal" min="0" value="0" />
+          </div>
+          <div class="field">
+            <label>7. Mengawas praktek sebanyak (siswa)</label>
+            <input type="number" id="awas_praktek" min="0" value="0" />
+          </div>
+          <div class="field">
+            <label>8. Mengawas ruangan sebanyak</label>
+            <input type="number" id="awas_ruang" min="0" value="0" />
+          </div>
+          <div class="field">
+            <label>9. Mengisi raport sebanyak (siswa)</label>
+            <input type="number" id="isi_raport" min="0" value="0" />
+          </div>
+          <div class="field">
+            <label>10. Editing soal dan Packing (rombel)</label>
+            <input type="number" id="edit_packing" min="0" value="0" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>11. Guru Pendamping</label>
+          <input type="number" id="guru_pendamping" min="0" value="0" />
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-submit" onclick="hitungMukafaah()">Hitung &amp; Tampilkan Rekap</button>
+          <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+        </div>
+
+        <section class="hasil-box" id="hasilBox">
+          <div class="hasil-header">
+            <h2>Rekapitulasi Mukafaah SAS — Tp. 2026/2027</h2>
+          </div>
+
+          <div class="summary-cards">
+            <div class="stat-card accent-tosca">
+              <div class="stat-label">Total Item Kegiatan Terhitung</div>
+              <div class="stat-value" id="totalItemAktif">0 Kegiatan</div>
+            </div>
+            <div class="stat-card accent-orange">
+              <div class="stat-label">Estimasi Penerimaan Mukafaah</div>
+              <div class="stat-value" id="ringkasanRupiah">Rp 0</div>
+            </div>
+          </div>
+
+          <div class="info-grid" id="infoPegawai"></div>
+          <div class="rincian-list" id="rincianList"></div>
+
+          <div class="total-box">
+            <span class="label-total">Total Mukafaah Diterima</span>
+            <span class="nominal-total" id="totalRupiah">Rp 0</span>
+          </div>
+        </section>
+      </main>
+    </div>
   </div>
 
   <script>
+    function masukDashboard() {
+      document.getElementById("welcomeScreen").style.display = "none";
+      document.getElementById("mainApp").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function kembaliSambutan() {
+      document.getElementById("mainApp").style.display = "none";
+      document.getElementById("welcomeScreen").style.display = "flex";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     const TARIF = {
       buat_soal: 45000,
       koreksi_soal: 3000,
