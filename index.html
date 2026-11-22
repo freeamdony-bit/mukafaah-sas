@@ -416,7 +416,7 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 18px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--tosca-border);
@@ -426,6 +426,27 @@
       margin: 0;
       font-size: 20px;
       color: var(--tosca-dark);
+    }
+
+    .btn-print {
+      background: var(--tosca-dark);
+      color: #ffffff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(15, 118, 110, 0.22);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-print:hover {
+      background: #0b5c55;
+      transform: translateY(-1px);
     }
 
     .summary-cards {
@@ -567,6 +588,10 @@
       white-space: nowrap;
     }
 
+    .print-sign {
+      display: none;
+    }
+
     @media (max-width: 680px) {
       .welcome-banner,
       .header-card {
@@ -587,6 +612,65 @@
       .btn-group {
         grid-template-columns: 1fr;
         flex-direction: column;
+      }
+    }
+
+    /* ================= PENGATURAN CETAK / SIMPAN PDF ================= */
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .welcome-screen,
+      .top-bar,
+      .form-input-area,
+      .btn-print,
+      .summary-cards {
+        display: none !important;
+      }
+      .main-app {
+        display: block !important;
+      }
+      .wrapper {
+        max-width: 100% !important;
+      }
+      .header-card {
+        box-shadow: none !important;
+        border-radius: 10px !important;
+        padding: 18px 22px !important;
+        margin-bottom: 16px !important;
+      }
+      .dashboard-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      .hasil-box {
+        display: block !important;
+        margin-top: 0 !important;
+        background: #ffffff !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .rekap-table {
+        min-width: 100% !important;
+      }
+      .print-sign {
+        display: flex !important;
+        justify-content: space-between;
+        margin-top: 34px;
+        padding: 0 12px;
+        font-size: 14.5px;
+      }
+      .print-sign .sign-col {
+        text-align: center;
+        width: 220px;
+      }
+      .print-sign .sign-space {
+        height: 64px;
       }
     }
   </style>
@@ -643,84 +727,87 @@
       </header>
 
       <main class="dashboard-card">
-        <div class="section-title">
-          <span>Data Pegawai &amp; Rekening</span>
-          <span class="tag-orange">Wajib Diisi</span>
-        </div>
-
-        <div class="field">
-          <label>1. Nama</label>
-          <input type="text" id="nama" placeholder="Contoh: Upik Butsiani, S.Psi" />
-        </div>
-
-        <div class="field">
-          <label>2. Wali Kelas / Guru Bidang</label>
-          <input type="text" id="jabatan" placeholder="Contoh: Wali Kelas 1A / Guru Matematika" />
-        </div>
-
-        <div class="grid-2">
-          <div class="field">
-            <label>3. Nomor WA</label>
-            <input type="text" id="wa" placeholder="Contoh: 0812xxxxxxxx" />
+        <div class="form-input-area">
+          <div class="section-title">
+            <span>Data Pegawai &amp; Rekening</span>
+            <span class="tag-orange">Wajib Diisi</span>
           </div>
-          <div class="field">
-            <label>Jenis Bank</label>
-            <input type="text" id="jenis_bank" placeholder="Contoh: BSI / BCA / BRI / Mandiri" />
-          </div>
-        </div>
 
-        <div class="field">
-          <label>4. Nomor Rekening</label>
-          <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
-        </div>
+          <div class="field">
+            <label>1. Nama</label>
+            <input type="text" id="nama" placeholder="Contoh: Upik Butsiani, S.Psi" />
+          </div>
 
-        <hr class="divider" />
+          <div class="field">
+            <label>2. Wali Kelas / Guru Bidang</label>
+            <input type="text" id="jabatan" placeholder="Contoh: Wali Kelas 1A / Guru Matematika" />
+          </div>
 
-        <div class="section-title">
-          <span>Rincian Beban Kerja SAS</span>
-          <span class="tag-orange">Hitung Otomatis</span>
-        </div>
+          <div class="grid-2">
+            <div class="field">
+              <label>3. Nomor WA</label>
+              <input type="text" id="wa" placeholder="Contoh: 0812xxxxxxxx" />
+            </div>
+            <div class="field">
+              <label>Jenis Bank</label>
+              <input type="text" id="jenis_bank" placeholder="Contoh: BSI / BCA / BRI / Mandiri" />
+            </div>
+          </div>
 
-        <div class="grid-2">
           <div class="field">
-            <label>5. Membuat soal sebanyak</label>
-            <input type="number" id="buat_soal" min="0" value="0" />
+            <label>4. Nomor Rekening</label>
+            <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
           </div>
-          <div class="field">
-            <label>6. Mengoreksi soal sebanyak (siswa)</label>
-            <input type="number" id="koreksi_soal" min="0" value="0" />
-          </div>
-          <div class="field">
-            <label>7. Mengawas praktek sebanyak (siswa)</label>
-            <input type="number" id="awas_praktek" min="0" value="0" />
-          </div>
-          <div class="field">
-            <label>8. Mengawas ruangan sebanyak</label>
-            <input type="number" id="awas_ruang" min="0" value="0" />
-          </div>
-          <div class="field">
-            <label>9. Mengisi raport sebanyak (siswa)</label>
-            <input type="number" id="isi_raport" min="0" value="0" />
-          </div>
-          <div class="field">
-            <label>10. Editing soal dan Packing (rombel)</label>
-            <input type="number" id="edit_packing" min="0" value="0" />
-          </div>
-        </div>
 
-        <div class="field">
-          <label>11. Guru Pendamping</label>
-          <input type="number" id="guru_pendamping" min="0" value="0" />
-        </div>
+          <hr class="divider" />
 
-        <div class="btn-group">
-          <button type="button" class="btn-submit" onclick="hitungMukafaah()">Hitung &amp; Tampilkan Rekap</button>
-          <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+          <div class="section-title">
+            <span>Rincian Beban Kerja SAS</span>
+            <span class="tag-orange">Hitung Otomatis</span>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>5. Membuat soal sebanyak</label>
+              <input type="number" id="buat_soal" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label>6. Mengoreksi soal sebanyak (siswa)</label>
+              <input type="number" id="koreksi_soal" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label>7. Mengawas praktek sebanyak (siswa)</label>
+              <input type="number" id="awas_praktek" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label>8. Mengawas ruangan sebanyak</label>
+              <input type="number" id="awas_ruang" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label>9. Mengisi raport sebanyak (siswa)</label>
+              <input type="number" id="isi_raport" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label>10. Editing soal dan Packing (rombel)</label>
+              <input type="number" id="edit_packing" min="0" value="0" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>11. Guru Pendamping</label>
+            <input type="number" id="guru_pendamping" min="0" value="0" />
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn-submit" onclick="hitungMukafaah()">Hitung &amp; Tampilkan Rekap</button>
+            <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+          </div>
         </div>
 
         <section class="hasil-box" id="hasilBox">
           <div class="hasil-header">
             <h2>Rekapitulasi Mukafaah SAS — Tp. 2026/2027</h2>
+            <button type="button" class="btn-print" onclick="cetakRekap()">🖨️ Print / Simpan PDF</button>
           </div>
 
           <div class="summary-cards">
@@ -756,107 +843,7 @@
               </tfoot>
             </table>
           </div>
-        </section>
-      </main>
-    </div>
-  </div>
 
-  <script>
-    function masukDashboard() {
-      document.getElementById("welcomeScreen").style.display = "none";
-      document.getElementById("mainApp").style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function kembaliSambutan() {
-      document.getElementById("mainApp").style.display = "none";
-      document.getElementById("welcomeScreen").style.display = "flex";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    const TARIF = {
-      buat_soal: 45000,
-      koreksi_soal: 3000,
-      awas_praktek: 2000,
-      awas_ruang: 17000,
-      isi_raport: 10000,
-      edit_packing: 170000,
-      guru_pendamping: 150000
-    };
-
-    function formatRupiah(angka) {
-      return "Rp " + Number(angka || 0).toLocaleString("id-ID");
-    }
-
-    function ambilAngka(id) {
-      const nilai = parseFloat(document.getElementById(id).value);
-      return isNaN(nilai) || nilai < 0 ? 0 : nilai;
-    }
-
-    function hitungMukafaah() {
-      const nama = document.getElementById("nama").value.trim() || "-";
-      const jabatan = document.getElementById("jabatan").value.trim() || "-";
-      const wa = document.getElementById("wa").value.trim() || "-";
-      const bank = document.getElementById("jenis_bank").value.trim() || "-";
-      const rekening = document.getElementById("rekening").value.trim() || "-";
-
-      const items = [
-        { label: "Pembuat Soal", jumlah: ambilAngka("buat_soal"), tarif: TARIF.buat_soal },
-        { label: "Mengoreksi Soal", jumlah: ambilAngka("koreksi_soal"), tarif: TARIF.koreksi_soal },
-        { label: "Mengawas Praktek", jumlah: ambilAngka("awas_praktek"), tarif: TARIF.awas_praktek },
-        { label: "Mengawas Ruangan", jumlah: ambilAngka("awas_ruang"), tarif: TARIF.awas_ruang },
-        { label: "Mengisi Rapor", jumlah: ambilAngka("isi_raport"), tarif: TARIF.isi_raport },
-        { label: "Editing Soal dan Packing", jumlah: ambilAngka("edit_packing"), tarif: TARIF.edit_packing },
-        { label: "Guru Pendamping", jumlah: ambilAngka("guru_pendamping"), tarif: TARIF.guru_pendamping }
-      ];
-
-      let total = 0;
-      let aktifCount = 0;
-      let htmlRows = "";
-
-      items.forEach((item, index) => {
-        const subtotal = item.jumlah * item.tarif;
-        total += subtotal;
-        if (item.jumlah > 0) {
-          aktifCount += 1;
-        }
-        htmlRows += `
-          <tr>
-            <td class="col-no">${index + 1}</td>
-            <td class="col-ket">${item.label}</td>
-            <td class="col-qty">${item.jumlah}</td>
-            <td class="col-nominal">${formatRupiah(item.tarif)}</td>
-            <td class="col-total">${formatRupiah(subtotal)}</td>
-          </tr>
-        `;
-      });
-
-      document.getElementById("infoPegawai").innerHTML = `
-        <div><strong>Nama:</strong> ${nama}</div>
-        <div><strong>Jabatan:</strong> ${jabatan}</div>
-        <div><strong>No. WA:</strong> ${wa}</div>
-        <div><strong>Bank &amp; No. Rek:</strong> ${bank} - ${rekening}</div>
-      `;
-
-      document.getElementById("totalItemAktif").textContent = `${aktifCount} / ${items.length} Jenis Kegiatan`;
-      document.getElementById("ringkasanRupiah").textContent = formatRupiah(total);
-      document.getElementById("tabelBody").innerHTML = htmlRows;
-      document.getElementById("totalRupiah").textContent = formatRupiah(total);
-
-      const hasilEl = document.getElementById("hasilBox");
-      hasilEl.style.display = "block";
-      hasilEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-
-    function resetForm() {
-      ["nama", "jabatan", "wa", "jenis_bank", "rekening"].forEach((id) => {
-        document.getElementById(id).value = "";
-      });
-      ["buat_soal", "koreksi_soal", "awas_praktek", "awas_ruang", "isi_raport", "edit_packing", "guru_pendamping"].forEach((id) => {
-        document.getElementById(id).value = 0;
-      });
-      document.getElementById("hasilBox").style.display = "none";
-    }
-  </script>
-</body>
-</html>
+          <div class="print-sign">
+            <div class="sign-col">
+              <div>
