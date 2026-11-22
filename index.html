@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rekapitulasi Mukafaah SAS - SDIT ALIA NURUL JIHADI</title>
+  <title>Slip Mukafaah SAS - TR. 2026/2027 - SDIT ALIA NURUL JIHADI</title>
   <style>
     :root {
       --tosca-dark: #0f766e;
@@ -397,6 +397,14 @@
 
     .btn-reset:hover {
       background: #ccfbf1;
+    }
+
+    .status-simpan {
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--tosca-dark);
+      min-height: 20px;
     }
 
     .hasil-box {
@@ -796,11 +804,12 @@
             <button type="button" class="btn-submit" id="btnHitung">Hitung &amp; Tampilkan Rekap</button>
             <button type="button" class="btn-reset" id="btnReset">Reset Form</button>
           </div>
+          <div class="status-simpan" id="statusSimpan"></div>
         </div>
 
         <section class="hasil-box" id="hasilBox">
           <div class="hasil-header">
-            <h2>Rekapitulasi Mukafaah SAS — Tp. 2026/2027</h2>
+            <h2>Slip Mukafaah SAS - TR. 2026/2027</h2>
             <button type="button" class="btn-print" id="btnPrint">🖨️ Print / Simpan PDF</button>
           </div>
 
@@ -858,6 +867,8 @@
   </div>
 
   <script>
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNBZE-LaZYEDahYjgsJytMQroKfUGxbr_VZF9iQoznm2Z_oOF-gN2hVamXy0D_Efxl/exec";
+
     const TARIF = {
       buat_soal: 45000,
       koreksi_soal: 3000,
@@ -893,6 +904,25 @@
       return isNaN(nilai) || nilai < 0 ? 0 : nilai;
     }
 
+    async function kirimKeSheets(payload) {
+      const statusEl = document.getElementById("statusSimpan");
+      if (!APPS_SCRIPT_URL) return;
+      if (statusEl) statusEl.textContent = "Menyimpan rekap ke Google Sheets...";
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        if (statusEl) statusEl.textContent = "✅ Rekap berhasil dikirim ke Google Sheets.";
+      } catch (err) {
+        console.error("Gagal kirim ke Google Sheets:", err);
+        if (statusEl) statusEl.textContent = "⚠️ Rekap tampil di layar, namun gagal mengirim ke Google Sheets.";
+      }
+    }
+
     function hitungMukafaah() {
       const nama = document.getElementById("nama").value.trim() || "-";
       const jabatan = document.getElementById("jabatan").value.trim() || "-";
@@ -900,14 +930,22 @@
       const bank = document.getElementById("jenis_bank").value.trim() || "-";
       const rekening = document.getElementById("rekening").value.trim() || "-";
 
+      const buatSoal = ambilAngka("buat_soal");
+      const koreksiSoal = ambilAngka("koreksi_soal");
+      const awasPraktek = ambilAngka("awas_praktek");
+      const awasRuang = ambilAngka("awas_ruang");
+      const isiRaport = ambilAngka("isi_raport");
+      const editPacking = ambilAngka("edit_packing");
+      const guruPendamping = ambilAngka("guru_pendamping");
+
       const items = [
-        { label: "Pembuat Soal", jumlah: ambilAngka("buat_soal"), tarif: TARIF.buat_soal },
-        { label: "Mengoreksi Soal", jumlah: ambilAngka("koreksi_soal"), tarif: TARIF.koreksi_soal },
-        { label: "Mengawas Praktek", jumlah: ambilAngka("awas_praktek"), tarif: TARIF.awas_praktek },
-        { label: "Mengawas Ruangan", jumlah: ambilAngka("awas_ruang"), tarif: TARIF.awas_ruang },
-        { label: "Mengisi Rapor", jumlah: ambilAngka("isi_raport"), tarif: TARIF.isi_raport },
-        { label: "Editing Soal dan Packing", jumlah: ambilAngka("edit_packing"), tarif: TARIF.edit_packing },
-        { label: "Guru Pendamping", jumlah: ambilAngka("guru_pendamping"), tarif: TARIF.guru_pendamping }
+        { label: "Pembuat Soal", jumlah: buatSoal, tarif: TARIF.buat_soal },
+        { label: "Mengoreksi Soal", jumlah: koreksiSoal, tarif: TARIF.koreksi_soal },
+        { label: "Mengawas Praktek", jumlah: awasPraktek, tarif: TARIF.awas_praktek },
+        { label: "Mengawas Ruangan", jumlah: awasRuang, tarif: TARIF.awas_ruang },
+        { label: "Mengisi Rapor", jumlah: isiRaport, tarif: TARIF.isi_raport },
+        { label: "Editing Soal dan Packing", jumlah: editPacking, tarif: TARIF.edit_packing },
+        { label: "Guru Pendamping", jumlah: guruPendamping, tarif: TARIF.guru_pendamping }
       ];
 
       let total = 0;
@@ -947,6 +985,22 @@
       const hasilEl = document.getElementById("hasilBox");
       hasilEl.style.display = "block";
       hasilEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      kirimKeSheets({
+        nama,
+        jabatan,
+        wa,
+        jenis_bank: bank,
+        rekening,
+        buat_soal: buatSoal,
+        koreksi_soal: koreksiSoal,
+        awas_praktek: awasPraktek,
+        awas_ruang: awasRuang,
+        isi_raport: isiRaport,
+        edit_packing: editPacking,
+        guru_pendamping: guruPendamping,
+        total_mukafaah: total
+      });
     }
 
     function cetakRekap() {
@@ -961,6 +1015,7 @@
         document.getElementById(id).value = 0;
       });
       document.getElementById("hasilBox").style.display = "none";
+      document.getElementById("statusSimpan").textContent = "";
     }
 
     document.getElementById("btnMasuk").addEventListener("click", masukDashboard);
