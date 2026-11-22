@@ -73,6 +73,37 @@
     button:hover {
       background: #166534;
     }
+    .hasil-box {
+      display: none;
+      margin-top: 28px;
+      padding: 24px;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+    }
+    .hasil-box h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+    .rincian-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed #cbd5e1;
+      font-size: 16px;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #15803d;
+    }
     @media (max-width: 640px) {
       .grid-2 {
         grid-template-columns: 1fr;
@@ -83,12 +114,18 @@
       h1 {
         font-size: 24px;
       }
+      .rincian-item {
+        flex-direction: column;
+      }
+      .total-row {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Form Input Mukafaah SAS (Tahap 1)</h1>
+    <h1>Form Input Mukafaah SAS</h1>
 
     <div class="field">
       <label>1. Nama</label>
@@ -105,14 +142,15 @@
         <label>3. Nomor WA</label>
         <input type="text" id="wa" placeholder="Contoh: 0812xxxxxxxx" />
       </div>
-<div class="field">
+      <div class="field">
         <label>Jenis Bank</label>
         <input type="text" id="jenis_bank" placeholder="Contoh: BSI / BCA / BRI / Mandiri" />
       </div>
-      <div class="field">
-        <label>4. Nomor Rekening</label>
-        <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
-      </div>
+    </div>
+
+    <div class="field">
+      <label>4. Nomor Rekening</label>
+      <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
     </div>
 
     <hr />
@@ -149,13 +187,80 @@
       <input type="number" id="guru_pendamping" min="0" value="0" />
     </div>
 
-    <button type="button" onclick="cekData()">Submit</button>
+    <button type="button" onclick="hitungMukafaah()">Hitung Mukafaah</button>
+
+    <div class="hasil-box" id="hasilBox">
+      <h2>Rincian Mukafaah SAS</h2>
+      <div id="infoPegawai" style="margin-bottom: 14px; font-size: 16px;"></div>
+      <div id="rincianList"></div>
+      <div class="total-row">
+        <span>Total Mukafaah</span>
+        <span id="totalRupiah">Rp 0</span>
+      </div>
+    </div>
   </div>
 
   <script>
-    function cekData() {
-      const nama = document.getElementById("nama").value;
-      alert("Data awal terbaca untuk: " + (nama || "(belum diisi)") + ". Lanjut ke Tahap 2 untuk hitung otomatis!");
+    const TARIF = {
+      buat_soal: 45000,
+      koreksi_soal: 3000,
+      awas_praktek: 2000,
+      awas_ruang: 17000,
+      isi_raport: 10000,
+      edit_packing: 170000,
+      guru_pendamping: 150000
+    };
+
+    function formatRupiah(angka) {
+      return "Rp " + Number(angka || 0).toLocaleString("id-ID");
+    }
+
+    function ambilAngka(id) {
+      const nilai = parseFloat(document.getElementById(id).value);
+      return isNaN(nilai) || nilai < 0 ? 0 : nilai;
+    }
+
+    function hitungMukafaah() {
+      const nama = document.getElementById("nama").value.trim() || "-";
+      const jabatan = document.getElementById("jabatan").value.trim() || "-";
+      const wa = document.getElementById("wa").value.trim() || "-";
+      const bank = document.getElementById("jenis_bank").value.trim() || "-";
+      const rekening = document.getElementById("rekening").value.trim() || "-";
+
+      const items = [
+        { label: "Membuat soal", satuan: "soal", jumlah: ambilAngka("buat_soal"), tarif: TARIF.buat_soal },
+        { label: "Mengoreksi soal", satuan: "siswa", jumlah: ambilAngka("koreksi_soal"), tarif: TARIF.koreksi_soal },
+        { label: "Mengawas praktek", satuan: "siswa", jumlah: ambilAngka("awas_praktek"), tarif: TARIF.awas_praktek },
+        { label: "Mengawas ruangan", satuan: "ruangan", jumlah: ambilAngka("awas_ruang"), tarif: TARIF.awas_ruang },
+        { label: "Mengisi raport", satuan: "siswa", jumlah: ambilAngka("isi_raport"), tarif: TARIF.isi_raport },
+        { label: "Editing soal dan Packing", satuan: "rombel", jumlah: ambilAngka("edit_packing"), tarif: TARIF.edit_packing },
+        { label: "Guru Pendamping", satuan: "kegiatan", jumlah: ambilAngka("guru_pendamping"), tarif: TARIF.guru_pendamping }
+      ];
+
+      let total = 0;
+      let htmlRincian = "";
+
+      items.forEach((item) => {
+        const subtotal = item.jumlah * item.tarif;
+        total += subtotal;
+        htmlRincian += `
+          <div class="rincian-item">
+            <span>${item.label} (${item.jumlah} ${item.satuan} × ${formatRupiah(item.tarif)})</span>
+            <strong>${formatRupiah(subtotal)}</strong>
+          </div>
+        `;
+      });
+
+      document.getElementById("infoPegawai").innerHTML = `
+        <div><strong>Nama:</strong> ${nama}</div>
+        <div><strong>Jabatan:</strong> ${jabatan}</div>
+        <div><strong>No. WA:</strong> ${wa}</div>
+        <div><strong>Bank & Rekening:</strong> ${bank} - ${rekening}</div>
+      `;
+
+      document.getElementById("rincianList").innerHTML = htmlRincian;
+      document.getElementById("totalRupiah").textContent = formatRupiah(total);
+      document.getElementById("hasilBox").style.display = "block";
     }
   </script>
 </body>
