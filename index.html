@@ -401,6 +401,7 @@
       background: #ccfbf1;
     }
 
+    /* ================= HASIL REKAPITULASI (TABEL) ================= */
     .hasil-box {
       display: none;
       margin-top: 30px;
@@ -474,54 +475,96 @@
       font-size: 15px;
     }
 
-    .rincian-list {
+    .table-wrapper {
       background: #ffffff;
       border-radius: 12px;
-      padding: 8px 18px;
-      border: 1px solid var(--line-soft);
+      border: 1.5px solid #cbd5e1;
+      overflow-x: auto;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
     }
 
-    .rincian-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 0;
-      border-bottom: 1px dashed #cbd5e1;
-      font-size: 15px;
+    .rekap-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15.5px;
+      min-width: 580px;
     }
 
-    .rincian-item:last-child {
-      border-bottom: none;
+    .rekap-table thead th {
+      background: linear-gradient(135deg, var(--tosca-dark), var(--tosca-main));
+      color: #ffffff;
+      font-weight: 700;
+      padding: 13px 14px;
+      border: 1px solid #0d9488;
+      text-align: center;
+      letter-spacing: 0.2px;
     }
 
-    .rincian-item strong {
+    .rekap-table thead th.col-ket {
+      text-align: left;
+    }
+
+    .rekap-table tbody td {
+      padding: 11px 14px;
+      border: 1px solid #cbd5e1;
+      color: var(--text-main);
+    }
+
+    .rekap-table tbody tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .rekap-table tbody tr:hover {
+      background-color: #f0fdfa;
+    }
+
+    .col-no {
+      width: 56px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .col-ket {
+      text-align: left;
+    }
+
+    .col-qty {
+      width: 110px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .col-nominal {
+      width: 145px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .col-total {
+      width: 165px;
+      text-align: right;
+      font-weight: 700;
       color: var(--tosca-dark);
       white-space: nowrap;
     }
 
-    .total-box {
-      margin-top: 18px;
-      background: linear-gradient(135deg, var(--tosca-dark), var(--tosca-main));
-      color: #ffffff;
-      padding: 18px 22px;
-      border-radius: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      border-right: 6px solid var(--orange-main);
-    }
-
-    .total-box .label-total {
-      font-size: 17px;
-      font-weight: 700;
-    }
-
-    .total-box .nominal-total {
-      font-size: 23px;
+    .rekap-table tfoot td {
+      background: linear-gradient(135deg, var(--orange-soft), #ffedd5);
+      border: 1px solid #fdba74;
+      padding: 14px;
       font-weight: 800;
-      color: #ffedd5;
+      font-size: 17px;
+      color: var(--orange-hover);
+    }
+
+    .rekap-table tfoot td.total-label-cell {
+      text-align: center;
+      letter-spacing: 0.4px;
+    }
+
+    .rekap-table tfoot td.total-amount-cell {
+      text-align: right;
+      white-space: nowrap;
     }
 
     @media (max-width: 680px) {
@@ -544,11 +587,6 @@
       .btn-group {
         grid-template-columns: 1fr;
         flex-direction: column;
-      }
-      .rincian-item,
-      .total-box {
-        flex-direction: column;
-        align-items: flex-start;
       }
     }
   </style>
@@ -697,11 +735,26 @@
           </div>
 
           <div class="info-grid" id="infoPegawai"></div>
-          <div class="rincian-list" id="rincianList"></div>
 
-          <div class="total-box">
-            <span class="label-total">Total Mukafaah Diterima</span>
-            <span class="nominal-total" id="totalRupiah">Rp 0</span>
+          <div class="table-wrapper">
+            <table class="rekap-table">
+              <thead>
+                <tr>
+                  <th class="col-no">No</th>
+                  <th class="col-ket">Keterangan</th>
+                  <th class="col-qty">Qty</th>
+                  <th class="col-nominal">Nominal</th>
+                  <th class="col-total">Total</th>
+                </tr>
+              </thead>
+              <tbody id="tabelBody"></tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" class="total-label-cell">Total</td>
+                  <td class="total-amount-cell" id="totalRupiah">Rp 0</td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </section>
       </main>
@@ -748,30 +801,33 @@
       const rekening = document.getElementById("rekening").value.trim() || "-";
 
       const items = [
-        { label: "Membuat soal", satuan: "soal", jumlah: ambilAngka("buat_soal"), tarif: TARIF.buat_soal },
-        { label: "Mengoreksi soal", satuan: "siswa", jumlah: ambilAngka("koreksi_soal"), tarif: TARIF.koreksi_soal },
-        { label: "Mengawas praktek", satuan: "siswa", jumlah: ambilAngka("awas_praktek"), tarif: TARIF.awas_praktek },
-        { label: "Mengawas ruangan", satuan: "ruangan", jumlah: ambilAngka("awas_ruang"), tarif: TARIF.awas_ruang },
-        { label: "Mengisi raport", satuan: "siswa", jumlah: ambilAngka("isi_raport"), tarif: TARIF.isi_raport },
-        { label: "Editing soal dan Packing", satuan: "rombel", jumlah: ambilAngka("edit_packing"), tarif: TARIF.edit_packing },
-        { label: "Guru Pendamping", satuan: "kegiatan", jumlah: ambilAngka("guru_pendamping"), tarif: TARIF.guru_pendamping }
+        { label: "Pembuat Soal", jumlah: ambilAngka("buat_soal"), tarif: TARIF.buat_soal },
+        { label: "Mengoreksi Soal", jumlah: ambilAngka("koreksi_soal"), tarif: TARIF.koreksi_soal },
+        { label: "Mengawas Praktek", jumlah: ambilAngka("awas_praktek"), tarif: TARIF.awas_praktek },
+        { label: "Mengawas Ruangan", jumlah: ambilAngka("awas_ruang"), tarif: TARIF.awas_ruang },
+        { label: "Mengisi Rapor", jumlah: ambilAngka("isi_raport"), tarif: TARIF.isi_raport },
+        { label: "Editing Soal dan Packing", jumlah: ambilAngka("edit_packing"), tarif: TARIF.edit_packing },
+        { label: "Guru Pendamping", jumlah: ambilAngka("guru_pendamping"), tarif: TARIF.guru_pendamping }
       ];
 
       let total = 0;
       let aktifCount = 0;
-      let htmlRincian = "";
+      let htmlRows = "";
 
-      items.forEach((item) => {
+      items.forEach((item, index) => {
         const subtotal = item.jumlah * item.tarif;
         total += subtotal;
         if (item.jumlah > 0) {
           aktifCount += 1;
         }
-        htmlRincian += `
-          <div class="rincian-item">
-            <span>${item.label} (${item.jumlah} ${item.satuan} &times; ${formatRupiah(item.tarif)})</span>
-            <strong>${formatRupiah(subtotal)}</strong>
-          </div>
+        htmlRows += `
+          <tr>
+            <td class="col-no">${index + 1}</td>
+            <td class="col-ket">${item.label}</td>
+            <td class="col-qty">${item.jumlah}</td>
+            <td class="col-nominal">${formatRupiah(item.tarif)}</td>
+            <td class="col-total">${formatRupiah(subtotal)}</td>
+          </tr>
         `;
       });
 
@@ -784,7 +840,7 @@
 
       document.getElementById("totalItemAktif").textContent = `${aktifCount} / ${items.length} Jenis Kegiatan`;
       document.getElementById("ringkasanRupiah").textContent = formatRupiah(total);
-      document.getElementById("rincianList").innerHTML = htmlRincian;
+      document.getElementById("tabelBody").innerHTML = htmlRows;
       document.getElementById("totalRupiah").textContent = formatRupiah(total);
 
       const hasilEl = document.getElementById("hasilBox");
