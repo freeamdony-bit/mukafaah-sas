@@ -371,7 +371,6 @@
       margin: 26px 0;
     }
 
-    /* Tabel Referensi Data Murid Tiap Rombel */
     .rombel-box {
       background: var(--tosca-soft);
       border: 1.5px solid var(--tosca-border);
@@ -485,7 +484,6 @@
       padding-left: 8px;
     }
 
-    /* Kalkulator Bantu Hitung Murid */
     .calc-murid-box {
       background: var(--orange-soft);
       border: 1.5px solid var(--orange-border);
@@ -917,6 +915,20 @@
       text-align: center;
     }
 
+    .slip-doa-footer {
+      margin-top: 22px;
+      padding: 14px 18px;
+      background: #e6faf6;
+      border: 1px solid #99f6e4;
+      border-left: 4px solid #0d9488;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #0f5c55;
+      line-height: 1.65;
+    }
+
     .print-sign {
       display: none;
     }
@@ -1025,6 +1037,10 @@
         font-size: 13.5px;
         padding: 10px 9px;
       }
+      .slip-doa-footer {
+        font-size: 13px;
+        padding: 12px;
+      }
       .grid-2,
       .summary-cards,
       .info-grid,
@@ -1093,6 +1109,13 @@
       .print-sign .sign-space {
         height: 64px;
       }
+      .slip-doa-footer {
+        margin-top: 22px;
+        background: #e6faf6 !important;
+        border: 1px solid #99f6e4 !important;
+        border-left: 4px solid #0d9488 !important;
+        color: #0f5c55 !important;
+      }
     }
   </style>
 </head>
@@ -1154,7 +1177,7 @@
 
           <div class="field">
             <label for="nama">1. Nama</label>
-            <input type="text" id="nama" placeholder="Tulis Nama Anda Lengkap dengan Gelar " />
+            <input type="text" id="nama" placeholder="Tulis nama anda" />
           </div>
 
           <div class="field">
@@ -1541,6 +1564,10 @@
               <div id="ttdNama">(........................................)</div>
             </div>
           </div>
+
+          <div class="slip-doa-footer">
+            Jazakumullah khoiran atas kerja keras dan dedikasi Ustadz/Ustadzah dalam pembuatan soal, pengoreksian, serta seluruh rangkaian kegiatan SAS. Semoga setiap lelah menjadi ladang pahala dan keberkahan. Baarakallahu fiikum.
+          </div>
         </section>
       </main>
     </div>
@@ -1593,13 +1620,11 @@
         return 0;
       }
 
-      // Hanya izinkan karakter matematika dasar
       if (!/^[0-9+\-*/().\s]+$/.test(raw)) {
         if (feedbackEl) feedbackEl.textContent = "⚠️ Gunakan hanya angka dan tanda +, -, ×, ÷.";
         return nilaiKalkulatorTerakhir;
       }
 
-      // Hindari operator ganda di akhir saat sedang mengetik
       raw = raw.replace(/[+\-*/.\s]+$/, "");
       if (!raw) {
         nilaiKalkulatorTerakhir = 0;
