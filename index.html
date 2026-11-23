@@ -1051,10 +1051,16 @@
     }
 
     @media print {
+      @page {
+        size: A4 portrait;
+        margin: 8mm 10mm;
+      }
       body {
         background: #ffffff !important;
         padding: 0 !important;
         margin: 0 !important;
+        font-size: 11.5px !important;
+        line-height: 1.35 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
@@ -1077,8 +1083,33 @@
       .header-card {
         box-shadow: none !important;
         border-radius: 10px !important;
-        padding: 18px 22px !important;
-        margin-bottom: 16px !important;
+        padding: 11px 16px !important;
+        gap: 14px !important;
+        margin-bottom: 10px !important;
+        border-bottom-width: 3px !important;
+      }
+      .logo-box {
+        width: 56px !important;
+        height: 56px !important;
+        min-width: 56px !important;
+        padding: 5px !important;
+        border-radius: 10px !important;
+      }
+      .header-title-group .badge {
+        font-size: 10px !important;
+        padding: 2px 9px !important;
+        margin-bottom: 4px !important;
+      }
+      .header-title-group h1 {
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+      }
+      .header-title-group .school-name {
+        font-size: 13px !important;
+        margin: 2px 0 1px !important;
+      }
+      .header-title-group .tp-text {
+        font-size: 11.5px !important;
       }
       .dashboard-card {
         border: none !important;
@@ -1092,29 +1123,72 @@
         border: none !important;
         padding: 0 !important;
       }
+      .hasil-header {
+        margin-bottom: 8px !important;
+        padding-bottom: 6px !important;
+      }
+      .hasil-header h2 {
+        font-size: 14.5px !important;
+      }
+      .info-grid {
+        padding: 8px 12px !important;
+        margin-bottom: 9px !important;
+        gap: 4px 16px !important;
+        font-size: 11.5px !important;
+        border-radius: 8px !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .table-wrapper {
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
       .rekap-table {
         min-width: 100% !important;
+        font-size: 11.5px !important;
+      }
+      .rekap-table thead th {
+        padding: 6px 10px !important;
+      }
+      .rekap-table tbody td {
+        padding: 6px 10px !important;
+      }
+      .rekap-table tfoot td {
+        padding: 7px 10px !important;
+        font-size: 12.5px !important;
       }
       .print-sign {
         display: flex !important;
         justify-content: space-between;
-        margin-top: 34px;
-        padding: 0 12px;
-        font-size: 14.5px;
+        margin-top: 14px !important;
+        padding: 0 16px !important;
+        font-size: 11.5px !important;
+        line-height: 1.35 !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
       .print-sign .sign-col {
         text-align: center;
-        width: 220px;
+        width: 210px;
       }
       .print-sign .sign-space {
-        height: 64px;
+        height: 36px !important;
       }
       .slip-doa-footer {
-        margin-top: 22px;
+        margin-top: 12px !important;
+        padding: 8px 12px !important;
+        font-size: 10.5px !important;
+        font-weight: 600 !important;
+        line-height: 1.38 !important;
+        border-radius: 8px !important;
         background: #e6faf6 !important;
         border: 1px solid #99f6e4 !important;
-        border-left: 4px solid #0d9488 !important;
+        border-left: 3.5px solid #0d9488 !important;
         color: #0f5c55 !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
     }
   </style>
