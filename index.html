@@ -377,7 +377,7 @@
       border: 1.5px solid var(--tosca-border);
       border-radius: 14px;
       padding: 18px 20px;
-      margin: 22px 0 26px;
+      margin: 22px 0 18px;
     }
 
     .rombel-heading {
@@ -483,6 +483,165 @@
     .rombel-table tfoot td.col-jenis-foot {
       text-align: left;
       padding-left: 8px;
+    }
+
+    /* Kalkulator Bantu Hitung Murid */
+    .calc-murid-box {
+      background: var(--orange-soft);
+      border: 1.5px solid var(--orange-border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 0 0 26px;
+    }
+
+    .calc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .calc-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--orange-hover);
+      margin: 0;
+    }
+
+    .calc-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .calc-display-row {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .calc-input-expr {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #fdba74;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      background: #ffffff;
+      color: var(--text-main);
+    }
+
+    .calc-result-box {
+      background: #ffffff;
+      border: 1.5px solid var(--tosca-border);
+      border-radius: 10px;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .calc-result-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .calc-result-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--tosca-dark);
+    }
+
+    .calc-keypad {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .calc-btn {
+      padding: 10px 6px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: var(--text-main);
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .calc-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .calc-btn.op {
+      background: var(--tosca-soft);
+      border-color: var(--tosca-border);
+      color: var(--tosca-dark);
+    }
+
+    .calc-btn.op:hover {
+      background: #ccfbf1;
+    }
+
+    .calc-btn.eq {
+      background: var(--orange-main);
+      border-color: var(--orange-main);
+      color: #ffffff;
+    }
+
+    .calc-btn.eq:hover {
+      background: var(--orange-hover);
+    }
+
+    .calc-btn.clr {
+      background: #fee2e2;
+      border-color: #fca5a5;
+      color: #991b1b;
+    }
+
+    .calc-copy-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .calc-copy-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-right: 4px;
+    }
+
+    .btn-copy-target {
+      background: var(--tosca-dark);
+      color: #ffffff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-copy-target:hover {
+      background: #0b5c55;
+    }
+
+    .calc-feedback {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--tosca-dark);
+      min-height: 18px;
+      margin-top: 8px;
     }
 
     .btn-group {
@@ -817,14 +976,22 @@
       .field-caption {
         font-size: 12px;
       }
-      .rombel-box {
+      .rombel-box,
+      .calc-murid-box {
         padding: 14px 12px;
       }
-      .rombel-heading .rombel-main-title {
+      .rombel-heading .rombel-main-title,
+      .calc-title {
         font-size: 14px;
       }
       .rombel-heading .rombel-sub-title {
         font-size: 12.5px;
+      }
+      .calc-display-row {
+        grid-template-columns: 1fr;
+      }
+      .calc-keypad {
+        grid-template-columns: repeat(4, 1fr);
       }
       .btn-masuk,
       .btn-submit,
@@ -878,6 +1045,7 @@
       .welcome-screen,
       .top-bar,
       .rombel-box,
+      .calc-murid-box,
       .form-input-area,
       .btn-print,
       .summary-cards,
@@ -1198,6 +1366,66 @@
             </div>
           </div>
 
+          <div class="calc-murid-box" id="calcMuridBox">
+            <div class="calc-header">
+              <h3 class="calc-title">🧮 Kalkulator Hitung Jumlah Murid</h3>
+            </div>
+            <div class="calc-subtitle">
+              Ketik atau tekan tombol untuk menjumlahkan jumlah murid dari beberapa rombel/kelas (contoh: <code>27+27+22</code>), lalu salin hasilnya langsung ke kolom beban kerja di bawah.
+            </div>
+
+            <div class="calc-display-row">
+              <input
+                type="text"
+                id="calcExpr"
+                class="calc-input-expr"
+                placeholder="Contoh: 27+27+22+21+21"
+                autocomplete="off"
+              />
+              <div class="calc-result-box">
+                <span class="calc-result-label">Hasil Murid:</span>
+                <span class="calc-result-val" id="calcResult">0</span>
+              </div>
+            </div>
+
+            <div class="calc-keypad">
+              <button type="button" class="calc-btn" data-val="7">7</button>
+              <button type="button" class="calc-btn" data-val="8">8</button>
+              <button type="button" class="calc-btn" data-val="9">9</button>
+              <button type="button" class="calc-btn op" data-val="+">+</button>
+              <button type="button" class="calc-btn op" data-val="-">-</button>
+              <button type="button" class="calc-btn clr" id="calcClear">C</button>
+
+              <button type="button" class="calc-btn" data-val="4">4</button>
+              <button type="button" class="calc-btn" data-val="5">5</button>
+              <button type="button" class="calc-btn" data-val="6">6</button>
+              <button type="button" class="calc-btn op" data-val="*">×</button>
+              <button type="button" class="calc-btn op" data-val="/">÷</button>
+              <button type="button" class="calc-btn clr" id="calcBackspace">⌫</button>
+
+              <button type="button" class="calc-btn" data-val="1">1</button>
+              <button type="button" class="calc-btn" data-val="2">2</button>
+              <button type="button" class="calc-btn" data-val="3">3</button>
+              <button type="button" class="calc-btn" data-val="0">0</button>
+              <button type="button" class="calc-btn" data-val="00">00</button>
+              <button type="button" class="calc-btn eq" id="calcEquals">=</button>
+            </div>
+
+            <div class="calc-copy-bar">
+              <span class="calc-copy-label">Salin hasil ke:</span>
+              <button type="button" class="btn-copy-target" data-target="koreksi_soal">
+                6. Mengoreksi Soal (siswa)
+              </button>
+              <button type="button" class="btn-copy-target" data-target="awas_praktek">
+                7. Mengawas Praktek (siswa)
+              </button>
+              <button type="button" class="btn-copy-target" data-target="isi_raport">
+                9. Mengisi Raport (siswa)
+              </button>
+            </div>
+            <div class="calc-feedback" id="calcFeedback"></div>
+          </div>
+
           <hr class="divider" />
 
           <div class="section-title">
@@ -1333,6 +1561,7 @@
 
     let dataSiapKirim = null;
     let sudahTerkirim = false;
+    let nilaiKalkulatorTerakhir = 0;
 
     function masukDashboard() {
       const welcome = document.getElementById("welcomeScreen");
@@ -1348,6 +1577,107 @@
       if (mainApp) mainApp.style.display = "none";
       if (welcome) welcome.style.display = "flex";
       window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function evaluasiKalkulator() {
+      const exprInput = document.getElementById("calcExpr");
+      const resultEl = document.getElementById("calcResult");
+      const feedbackEl = document.getElementById("calcFeedback");
+      if (!exprInput || !resultEl) return 0;
+
+      let raw = exprInput.value.replace(/×/g, "*").replace(/÷/g, "/").trim();
+      if (!raw) {
+        nilaiKalkulatorTerakhir = 0;
+        resultEl.textContent = "0";
+        if (feedbackEl) feedbackEl.textContent = "";
+        return 0;
+      }
+
+      // Hanya izinkan karakter matematika dasar
+      if (!/^[0-9+\-*/().\s]+$/.test(raw)) {
+        if (feedbackEl) feedbackEl.textContent = "⚠️ Gunakan hanya angka dan tanda +, -, ×, ÷.";
+        return nilaiKalkulatorTerakhir;
+      }
+
+      // Hindari operator ganda di akhir saat sedang mengetik
+      raw = raw.replace(/[+\-*/.\s]+$/, "");
+      if (!raw) {
+        nilaiKalkulatorTerakhir = 0;
+        resultEl.textContent = "0";
+        return 0;
+      }
+
+      try {
+        const hasil = Function('"use strict"; return (' + raw + ')')();
+        if (typeof hasil === "number" && isFinite(hasil)) {
+          const dibulatkan = Math.max(0, Math.round(hasil));
+          nilaiKalkulatorTerakhir = dibulatkan;
+          resultEl.textContent = dibulatkan.toLocaleString("id-ID");
+          if (feedbackEl) feedbackEl.textContent = "";
+          return dibulatkan;
+        }
+      } catch (e) {
+        // Abaikan saat ekspresi belum lengkap
+      }
+      return nilaiKalkulatorTerakhir;
+    }
+
+    function initKalkulatorMurid() {
+      const exprInput = document.getElementById("calcExpr");
+      const clearBtn = document.getElementById("calcClear");
+      const backBtn = document.getElementById("calcBackspace");
+      const eqBtn = document.getElementById("calcEquals");
+
+      document.querySelectorAll(".calc-btn[data-val]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          exprInput.value += btn.getAttribute("data-val");
+          evaluasiKalkulator();
+          exprInput.focus();
+        });
+      });
+
+      exprInput.addEventListener("input", evaluasiKalkulator);
+
+      exprInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          const val = evaluasiKalkulator();
+          exprInput.value = String(val);
+        }
+      });
+
+      clearBtn.addEventListener("click", () => {
+        exprInput.value = "";
+        evaluasiKalkulator();
+        exprInput.focus();
+      });
+
+      backBtn.addEventListener("click", () => {
+        exprInput.value = exprInput.value.slice(0, -1);
+        evaluasiKalkulator();
+        exprInput.focus();
+      });
+
+      eqBtn.addEventListener("click", () => {
+        const val = evaluasiKalkulator();
+        exprInput.value = String(val);
+        exprInput.focus();
+      });
+
+      document.querySelectorAll(".btn-copy-target").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-target");
+          const targetInput = document.getElementById(targetId);
+          const feedbackEl = document.getElementById("calcFeedback");
+          const nilai = evaluasiKalkulator();
+          if (targetInput) {
+            targetInput.value = nilai;
+            if (feedbackEl) {
+              feedbackEl.textContent = `✅ Angka ${nilai} disalin ke "${btn.textContent.trim()}".`;
+            }
+          }
+        });
+      });
     }
 
     function formatRupiah(angka) {
@@ -1504,6 +1834,8 @@
       ["buat_soal", "koreksi_soal", "awas_praktek", "awas_ruang", "isi_raport", "edit_packing", "guru_pendamping"].forEach((id) => {
         document.getElementById(id).value = 0;
       });
+      document.getElementById("calcExpr").value = "";
+      evaluasiKalkulator();
       dataSiapKirim = null;
       sudahTerkirim = false;
       setTombolKirimState(false, false);
@@ -1511,6 +1843,7 @@
       document.getElementById("statusSimpan").textContent = "";
     }
 
+    initKalkulatorMurid();
     document.getElementById("btnMasuk").addEventListener("click", masukDashboard);
     document.getElementById("btnKembali").addEventListener("click", kembaliSambutan);
     document.getElementById("btnHitung").addEventListener("click", hitungMukafaah);
