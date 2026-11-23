@@ -640,19 +640,87 @@
       display: none;
     }
 
-    @media (max-width: 680px) {
+@media (max-width: 680px) {
+      body {
+        padding: 14px 10px 32px;
+        font-size: 13.5px;
+      }
       .welcome-banner,
       .header-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 24px 20px;
+        padding: 18px 16px;
+        gap: 14px;
+      }
+      .welcome-logo,
+      .logo-box {
+        width: 64px;
+        height: 64px;
+        min-width: 64px;
+      }
+      .welcome-banner h1,
+      .header-title-group h1 {
+        font-size: 17px;
+      }
+      .welcome-banner .school-sub,
+      .header-title-group .school-name {
+        font-size: 14px;
       }
       .welcome-body,
       .dashboard-card {
-        padding: 22px 18px;
+        padding: 16px 14px;
+      }
+      .salam-pembuka {
+        font-size: 15px;
       }
       .pesan-utama {
+        font-size: 13.5px;
         text-align: left;
+      }
+      .doa-box,
+      .salam-penutup {
+        font-size: 14px;
+      }
+      .section-title {
+        font-size: 15px;
+      }
+      label {
+        font-size: 13px;
+      }
+      input,
+      select {
+        padding: 9px 11px;
+        font-size: 13.5px;
+      }
+      .btn-masuk,
+      .btn-submit,
+      .btn-reset,
+      .btn-kirim-bendahara {
+        padding: 11px 14px;
+        font-size: 14px;
+      }
+      .hasil-box {
+        padding: 14px;
+      }
+      .hasil-header h2 {
+        font-size: 16px;
+      }
+      .stat-value {
+        font-size: 15px;
+      }
+      .info-grid {
+        font-size: 13px;
+        padding: 12px;
+      }
+      .rekap-table {
+        font-size: 12.5px;
+        min-width: 480px;
+      }
+      .rekap-table thead th,
+      .rekap-table tbody td {
+        padding: 8px 9px;
+      }
+      .rekap-table tfoot td {
+        font-size: 13.5px;
+        padding: 10px 9px;
       }
       .grid-2,
       .summary-cards,
@@ -662,7 +730,6 @@
         flex-direction: column;
       }
     }
-
     @media print {
       body {
         background: #ffffff !important;
