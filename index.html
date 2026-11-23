@@ -1801,9 +1801,9 @@
       dataSiapKirim = {
         nama,
         jabatan,
-        wa,
+        wa: wa !== "-" ? "'" + wa : "-",
         jenis_bank: bank,
-        rekening,
+        rekening: rekening !== "-" ? "'" + rekening : "-",
         buat_soal: buatSoal,
         koreksi_soal: koreksiSoal,
         awas_praktek: awasPraktek,
