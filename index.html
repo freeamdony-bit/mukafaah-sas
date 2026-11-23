@@ -351,6 +351,14 @@
       box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
     }
 
+    .field-caption {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -640,13 +648,15 @@
       display: none;
     }
 
-@media (max-width: 680px) {
+    @media (max-width: 680px) {
       body {
         padding: 14px 10px 32px;
         font-size: 13.5px;
       }
       .welcome-banner,
       .header-card {
+        flex-direction: column;
+        text-align: center;
         padding: 18px 16px;
         gap: 14px;
       }
@@ -690,6 +700,9 @@
         padding: 9px 11px;
         font-size: 13.5px;
       }
+      .field-caption {
+        font-size: 12px;
+      }
       .btn-masuk,
       .btn-submit,
       .btn-reset,
@@ -730,6 +743,7 @@
         flex-direction: column;
       }
     }
+
     @media print {
       body {
         background: #ffffff !important;
@@ -887,32 +901,39 @@
             <div class="field">
               <label for="buat_soal">5. Membuat soal sebanyak</label>
               <input type="number" id="buat_soal" min="0" value="0" />
+              <small class="field-caption">Isi dengan jumlah paket/naskah soal SAS yang dibuat (bukan jumlah butir soal), biarkan 0 jika tidak bertugas.</small>
             </div>
             <div class="field">
               <label for="koreksi_soal">6. Mengoreksi soal sebanyak (siswa)</label>
               <input type="number" id="koreksi_soal" min="0" value="0" />
+              <small class="field-caption">Isi dengan jumlah total siswa yang lembar jawabannya dikoreksi pada kegiatan SAS, biarkan 0 jika tidak ada.</small>
             </div>
             <div class="field">
               <label for="awas_praktek">7. Mengawas praktek sebanyak (siswa)</label>
               <input type="number" id="awas_praktek" min="0" value="0" />
+              <small class="field-caption">Isi dengan jumlah siswa yang diawasi saat ujian praktik SAS sesuai penugasan, biarkan 0 jika tidak ada.</small>
             </div>
             <div class="field">
               <label for="awas_ruang">8. Mengawas ruangan sebanyak</label>
               <input type="number" id="awas_ruang" min="0" value="0" />
+              <small class="field-caption">Isi dengan berapa kali Anda bertugas mengawas ujian di dalam ruangan selama SAS (misalnya 2 atau 5 kali), biarkan 0 jika tidak bertugas.</small>
             </div>
             <div class="field">
               <label for="isi_raport">9. Mengisi raport sebanyak (siswa)</label>
               <input type="number" id="isi_raport" min="0" value="0" />
+              <small class="field-caption">Isi dengan jumlah siswa yang nilai/catatan rapor SAS-nya diinput dan diselesaikan, biarkan 0 jika tidak bertugas.</small>
             </div>
             <div class="field">
               <label for="edit_packing">10. Editing soal dan Packing (rombel)</label>
               <input type="number" id="edit_packing" min="0" value="0" />
+              <small class="field-caption">Isi dengan jumlah rombongan belajar (rombel) yang naskah soalnya di-edit dan di-packing untuk SAS, biarkan 0 jika tidak ada.</small>
             </div>
           </div>
 
           <div class="field">
             <label for="guru_pendamping">11. Guru Pendamping</label>
             <input type="number" id="guru_pendamping" min="0" value="0" />
+            <small class="field-caption">Isi dengan jumlah penugasan sebagai Guru Pendamping selama pelaksanaan SAS (misalnya 1 jika bertugas, atau 0 jika tidak bertugas).</small>
           </div>
 
           <div class="btn-group">
