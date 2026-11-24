@@ -405,6 +405,28 @@
       line-height: 1.45;
     }
 
+    .soal-split-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 16px;
+    }
+
+    .soal-subpanel {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .soal-subpanel-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--tosca-dark);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
     .mini-table-wrap {
       background: #ffffff;
       border: 1px solid #cbd5e1;
@@ -415,13 +437,13 @@
     .sub-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 14px;
+      font-size: 13.5px;
     }
 
     .sub-table th {
       background: linear-gradient(135deg, var(--tosca-dark), var(--tosca-main));
       color: #ffffff;
-      padding: 9px 10px;
+      padding: 8px 9px;
       border: 1px solid #0d9488;
       text-align: center;
       font-weight: 700;
@@ -429,7 +451,7 @@
     }
 
     .sub-table td {
-      padding: 7px 10px;
+      padding: 6px 9px;
       border: 1px solid #cbd5e1;
       vertical-align: middle;
     }
@@ -447,53 +469,59 @@
       border: 1px solid #fdba74;
       font-weight: 800;
       color: var(--orange-hover);
-      padding: 9px 10px;
+      padding: 8px 9px;
     }
 
     .chk-input {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
       accent-color: var(--tosca-main);
       cursor: pointer;
     }
 
     .kali-input {
-      width: 74px !important;
-      padding: 6px 8px !important;
-      font-size: 14px !important;
+      width: 72px !important;
+      padding: 5px 8px !important;
+      font-size: 13.5px !important;
       font-weight: 700;
       text-align: center;
       border-radius: 8px !important;
     }
 
     .mapel-info-bar {
-      margin-top: 10px;
+      margin-top: 12px;
       background: #ffffff;
       border: 1px solid var(--tosca-border);
       border-radius: 10px;
       padding: 10px 14px;
       font-size: 13.5px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px 16px;
+      align-items: center;
     }
 
     .choice-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-      gap: 10px;
+      gap: 9px;
+    }
+
+    .kelas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
     }
 
     .choice-item {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
       background: #ffffff;
       border: 1.5px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 14px;
+      border-radius: 9px;
+      padding: 8px 11px;
+      font-size: 13.5px;
       font-weight: 600;
       cursor: pointer;
       transition: border-color 0.15s, background 0.15s;
@@ -799,6 +827,13 @@
 
     .print-sign {
       display: none;
+    }
+
+    @media (max-width: 760px) {
+      .soal-split-grid,
+      .mapel-info-bar {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 680px) {
@@ -1122,19 +1157,29 @@
             <span class="tag-orange">Pilih &amp; Hitung Otomatis</span>
           </div>
 
-          <!-- 5. MEMBUAT SOAL (CHECKBOX MAPEL) -->
+          <!-- 5. MEMBUAT SOAL (MAPEL + KELAS) -->
           <div class="task-card">
             <div class="task-card-header">
               <h3 class="task-card-title">5. Membuat soal sebanyak</h3>
-              <span class="task-badge-total" id="badgeBuatSoal">Jumlah: 0 Paket</span>
+              <span class="task-badge-total" id="badgeBuatSoal">Sebanyak: 0</span>
             </div>
             <div class="task-note">
-              Centang mata pelajaran yang naskah soal SAS-nya Anda buat. Setiap mapel yang dicentang dihitung 1 paket soal.
+              Centang <strong>Mapel</strong> dan <strong>Kelas</strong> yang dibuatkan naskah soal SAS-nya (contoh: centang <strong>PKN</strong> serta <strong>Kelas 5</strong> dan <strong>Kelas 6</strong> jika membuat soal PKN untuk kelas 5 dan 6).
             </div>
-            <div class="choice-grid" id="mapelGrid"></div>
+            <div class="soal-split-grid">
+              <div class="soal-subpanel">
+                <div class="soal-subpanel-title">Pilihan Mapel</div>
+                <div class="choice-grid" id="mapelGrid"></div>
+              </div>
+              <div class="soal-subpanel">
+                <div class="soal-subpanel-title">Pilihan Kelas</div>
+                <div class="kelas-grid" id="kelasSoalGrid"></div>
+              </div>
+            </div>
             <div class="mapel-info-bar">
               <div><strong>Jenis Mapel:</strong> <span id="jenisMapelText">-</span></div>
-              <div><strong>Total Paket Soal:</strong> <span id="totalBuatSoalText">0</span></div>
+              <div><strong>Kelas:</strong> <span id="kelasSoalText">-</span></div>
+              <div><strong>Sebanyak:</strong> <span id="totalBuatSoalText">0</span></div>
             </div>
           </div>
 
@@ -1266,7 +1311,7 @@
               Setiap pilihan KKG yang dicentang bernilai <strong>1</strong>; jika tidak dipilih maka bernilai <strong>0</strong>.
             </div>
             <div class="choice-grid" id="kkgGrid"></div>
-            <div class="mapel-info-bar">
+            <div class="mapel-info-bar" style="grid-template-columns:1fr;">
               <div><strong>Total Editing dan Packing:</strong> <span id="totalEditPackingText">0</span></div>
             </div>
           </div>
@@ -1281,7 +1326,7 @@
               Setiap pilihan Pendamping yang dicentang bernilai <strong>1</strong>; jika tidak dipilih maka bernilai <strong>0</strong>.
             </div>
             <div class="choice-grid" id="pendampingGrid"></div>
-            <div class="mapel-info-bar">
+            <div class="mapel-info-bar" style="grid-template-columns:1fr;">
               <div><strong>Total Guru Pendamping:</strong> <span id="totalGuruPendampingText">0</span></div>
             </div>
           </div>
@@ -1391,6 +1436,15 @@
       "BAHASA INGGRIS"
     ];
 
+    const KELAS_SOAL_LIST = [
+      "Kelas 1",
+      "Kelas 2",
+      "Kelas 3",
+      "Kelas 4",
+      "Kelas 5",
+      "Kelas 6"
+    ];
+
     const ROMBEL_LIST = [
       { kelas: "1A", siswa: 27 },
       { kelas: "1B", siswa: 27 },
@@ -1461,13 +1515,28 @@
       return "Rp " + Number(angka || 0).toLocaleString("id-ID");
     }
 
+    function gabungTeksDaftar(arr) {
+      if (!arr || arr.length === 0) return "-";
+      if (arr.length === 1) return arr[0];
+      if (arr.length === 2) return `${arr[0]} dan ${arr[1]}`;
+      return `${arr.slice(0, -1).join(", ")} dan ${arr[arr.length - 1]}`;
+    }
+
     function renderFormInteraktif() {
-      // 5. Mapel checkboxes
+      // 5. Mapel & Kelas checkboxes
       const mapelGrid = document.getElementById("mapelGrid");
       mapelGrid.innerHTML = MAPEL_LIST.map((m, idx) => `
         <label class="choice-item" id="lblMapel_${idx}">
           <input type="checkbox" class="chk-input mapel-chk" data-mapel="${m}" />
           <span>${idx + 1}. ${m}</span>
+        </label>
+      `).join("");
+
+      const kelasSoalGrid = document.getElementById("kelasSoalGrid");
+      kelasSoalGrid.innerHTML = KELAS_SOAL_LIST.map((k, idx) => `
+        <label class="choice-item" id="lblKelasSoal_${idx}">
+          <input type="checkbox" class="chk-input kelas-soal-chk" data-kelas="${k}" />
+          <span>${k}</span>
         </label>
       `).join("");
 
@@ -1525,6 +1594,13 @@
       document.querySelectorAll(".mapel-chk").forEach((chk, idx) => {
         chk.addEventListener("change", () => {
           document.getElementById(`lblMapel_${idx}`).classList.toggle("checked", chk.checked);
+          updateRingkasanBeban();
+        });
+      });
+
+      document.querySelectorAll(".kelas-soal-chk").forEach((chk, idx) => {
+        chk.addEventListener("change", () => {
+          document.getElementById(`lblKelasSoal_${idx}`).classList.toggle("checked", chk.checked);
           updateRingkasanBeban();
         });
       });
@@ -1592,7 +1668,16 @@
       document.querySelectorAll(".mapel-chk:checked").forEach((chk) => {
         mapelTerpilih.push(chk.getAttribute("data-mapel"));
       });
-      const buatSoal = mapelTerpilih.length;
+
+      const kelasSoalTerpilih = [];
+      document.querySelectorAll(".kelas-soal-chk:checked").forEach((chk) => {
+        kelasSoalTerpilih.push(chk.getAttribute("data-kelas"));
+      });
+
+      const buatSoal =
+        mapelTerpilih.length > 0 && kelasSoalTerpilih.length > 0
+          ? mapelTerpilih.length * kelasSoalTerpilih.length
+          : 0;
 
       const koreksiSoal = hitungRombelKali("koreksi");
       const awasPraktek = hitungRombelKali("praktek");
@@ -1626,6 +1711,7 @@
       return {
         buatSoal,
         mapelTerpilih,
+        kelasSoalTerpilih,
         koreksiSoal,
         awasPraktek,
         awasRuang,
@@ -1640,8 +1726,9 @@
     function updateRingkasanBeban() {
       const b = ambilNilaiBeban();
 
-      document.getElementById("badgeBuatSoal").textContent = `Jumlah: ${b.buatSoal} Paket`;
-      document.getElementById("jenisMapelText").textContent = b.mapelTerpilih.length > 0 ? b.mapelTerpilih.join(", ") : "-";
+      document.getElementById("badgeBuatSoal").textContent = `Sebanyak: ${b.buatSoal}`;
+      document.getElementById("jenisMapelText").textContent = gabungTeksDaftar(b.mapelTerpilih);
+      document.getElementById("kelasSoalText").textContent = gabungTeksDaftar(b.kelasSoalTerpilih);
       document.getElementById("totalBuatSoalText").textContent = b.buatSoal;
 
       document.getElementById("badgeKoreksiSoal").textContent = `Siswa Sebanyak: ${b.koreksiSoal}`;
@@ -1721,23 +1808,24 @@
 
       const b = ambilNilaiBeban();
 
+      const detailSoal =
+        b.mapelTerpilih.length > 0 && b.kelasSoalTerpilih.length > 0
+          ? `Pembuat Soal (${gabungTeksDaftar(b.mapelTerpilih)} - ${gabungTeksDaftar(b.kelasSoalTerpilih)})`
+          : "Pembuat Soal";
+
       const items = [
-        {
-          label: b.mapelTerpilih.length > 0 ? `Pembuat Soal (${b.mapelTerpilih.join(", ")})` : "Pembuat Soal",
-          jumlah: b.buatSoal,
-          tarif: TARIF.buat_soal
-        },
+        { label: detailSoal, jumlah: b.buatSoal, tarif: TARIF.buat_soal },
         { label: "Mengoreksi Soal", jumlah: b.koreksiSoal, tarif: TARIF.koreksi_soal },
         { label: "Mengawas Praktek", jumlah: b.awasPraktek, tarif: TARIF.awas_praktek },
         { label: "Mengawas Ruangan", jumlah: b.awasRuang, tarif: TARIF.awas_ruang },
         { label: "Mengisi Rapor", jumlah: b.isiRaport, tarif: TARIF.isi_raport },
         {
-          label: b.kkgTerpilih.length > 0 ? `Editing Soal dan Packing (${b.kkgTerpilih.join(", ")})` : "Editing Soal dan Packing",
+          label: b.kkgTerpilih.length > 0 ? `Editing Soal dan Packing (${gabungTeksDaftar(b.kkgTerpilih)})` : "Editing Soal dan Packing",
           jumlah: b.editPacking,
           tarif: TARIF.edit_packing
         },
         {
-          label: b.pendampingTerpilih.length > 0 ? `Guru Pendamping (${b.pendampingTerpilih.join(", ")})` : "Guru Pendamping",
+          label: b.pendampingTerpilih.length > 0 ? `Guru Pendamping (${gabungTeksDaftar(b.pendampingTerpilih)})` : "Guru Pendamping",
           jumlah: b.guruPendamping,
           tarif: TARIF.guru_pendamping
         }
