@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Slip Mukafaah SAS - TP. 2026/2027 - SDIT ALIA NURUL JIHADI</title>
+  <title>Slip Mukafaah SAS - TR. 2026/2027 - SDIT ALIA NURUL JIHADI</title>
   <style>
     :root {
       --tosca-dark: #0f766e;
@@ -193,7 +193,7 @@
     }
 
     .wrapper {
-      max-width: 920px;
+      max-width: 940px;
       margin: 0 auto;
     }
 
@@ -320,21 +320,22 @@
       margin-bottom: 18px;
     }
 
-    label {
+    label.field-label {
       display: block;
-      font-weight: 600;
-      margin-bottom: 7px;
-      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 15.5px;
       color: var(--text-main);
     }
 
-    input,
+    input[type="text"],
+    input[type="number"],
     select {
       width: 100%;
-      padding: 12px 14px;
+      padding: 11px 14px;
       border: 1.5px solid #cbd5e1;
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 15.5px;
       color: var(--text-main);
       background-color: #ffffff;
       transition: border-color 0.2s, box-shadow 0.2s;
@@ -351,14 +352,6 @@
       box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
     }
 
-    .field-caption {
-      display: block;
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -371,275 +364,150 @@
       margin: 26px 0;
     }
 
-    .rombel-box {
-      background: var(--tosca-soft);
-      border: 1.5px solid var(--tosca-border);
+    .task-card {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
       border-radius: 14px;
       padding: 18px 20px;
-      margin: 22px 0 18px;
+      margin-bottom: 22px;
     }
 
-    .rombel-heading {
-      text-align: center;
-      margin-bottom: 14px;
+    .task-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .rombel-heading .rombel-main-title {
+    .task-card-title {
       font-size: 16px;
       font-weight: 800;
       color: var(--tosca-dark);
-      letter-spacing: 0.4px;
-      line-height: 1.35;
+      margin: 0;
     }
 
-    .rombel-heading .rombel-sub-title {
-      font-size: 14px;
-      font-weight: 700;
+    .task-badge-total {
+      background: var(--orange-soft);
       color: var(--orange-hover);
-      margin-top: 2px;
+      border: 1px solid var(--orange-border);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 800;
     }
 
-    .rombel-scroll {
+    .task-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.45;
+    }
+
+    .mini-table-wrap {
       background: #ffffff;
-      border: 1px solid #94a3b8;
+      border: 1px solid #cbd5e1;
       border-radius: 10px;
       overflow-x: auto;
     }
 
-    .rombel-table {
+    .sub-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 11.5px;
-      min-width: 1120px;
-      text-align: center;
+      font-size: 14px;
     }
 
-    .rombel-table th,
-    .rombel-table td {
-      border: 1px solid #94a3b8;
-      padding: 5px 4px;
+    .sub-table th {
+      background: linear-gradient(135deg, var(--tosca-dark), var(--tosca-main));
+      color: #ffffff;
+      padding: 9px 10px;
+      border: 1px solid #0d9488;
+      text-align: center;
+      font-weight: 700;
       white-space: nowrap;
     }
 
-    .rombel-table thead tr.row-kelas th {
-      background: #c5d99d;
-      color: #0f172a;
-      font-weight: 700;
-      font-size: 12px;
+    .sub-table td {
+      padding: 7px 10px;
+      border: 1px solid #cbd5e1;
+      vertical-align: middle;
     }
 
-    .rombel-table thead tr.row-rombel th {
-      background: #d9e6be;
-      color: #0f172a;
-      font-weight: 700;
-    }
-
-    .rombel-table thead tr.row-walikelas th {
-      background: #eef5df;
-      color: #0f172a;
-      font-weight: 600;
-    }
-
-    .rombel-table tbody td.col-jenis {
-      background: #d9e6be;
-      font-weight: 700;
-      text-align: left;
-      padding-left: 8px;
-      padding-right: 8px;
-    }
-
-    .rombel-table tbody tr.row-laki td:not(.col-jenis):not(.col-jml-rombel) {
-      background: #e0f2fe;
-    }
-
-    .rombel-table tbody tr.row-perempuan td:not(.col-jenis):not(.col-jml-rombel) {
-      background: #f0f9ff;
-    }
-
-    .rombel-table tbody td.col-jml-rombel {
-      background: #f1f5f9;
-      font-weight: 700;
-    }
-
-    .rombel-table tbody tr.row-jumlah-kosong td {
-      background: #ffffff;
-      height: 22px;
-      font-weight: 700;
-    }
-
-    .rombel-table tbody tr.row-total-kelas td {
+    .sub-table tbody tr:nth-child(even) {
       background: #f8fafc;
-      font-weight: 700;
     }
 
-    .rombel-table tfoot tr.row-keseluruhan td {
-      background: #c5d99d;
-      font-weight: 800;
-      color: #0f172a;
-      font-size: 12.5px;
+    .sub-table tbody tr.row-active {
+      background: #f0fdfa;
     }
 
-    .rombel-table tfoot td.col-jenis-foot {
-      text-align: left;
-      padding-left: 8px;
-    }
-
-    .calc-murid-box {
+    .sub-table tfoot td {
       background: var(--orange-soft);
-      border: 1.5px solid var(--orange-border);
-      border-radius: 14px;
-      padding: 18px 20px;
-      margin: 0 0 26px;
-    }
-
-    .calc-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .calc-title {
-      font-size: 16px;
+      border: 1px solid #fdba74;
       font-weight: 800;
       color: var(--orange-hover);
-      margin: 0;
+      padding: 9px 10px;
     }
 
-    .calc-subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
+    .chk-input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--tosca-main);
+      cursor: pointer;
     }
 
-    .calc-display-row {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
+    .kali-input {
+      width: 74px !important;
+      padding: 6px 8px !important;
+      font-size: 14px !important;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 8px !important;
     }
 
-    .calc-input-expr {
-      width: 100%;
-      padding: 11px 14px;
-      border: 1.5px solid #fdba74;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
+    .mapel-info-bar {
+      margin-top: 10px;
       background: #ffffff;
-      color: var(--text-main);
-    }
-
-    .calc-result-box {
-      background: #ffffff;
-      border: 1.5px solid var(--tosca-border);
+      border: 1px solid var(--tosca-border);
       border-radius: 10px;
-      padding: 9px 14px;
+      padding: 10px 14px;
+      font-size: 13.5px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
       gap: 10px;
     }
 
-    .calc-result-label {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .calc-result-val {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--tosca-dark);
-    }
-
-    .calc-keypad {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .calc-btn {
-      padding: 10px 6px;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
-      color: var(--text-main);
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-    }
-
-    .calc-btn:hover {
-      background: #f1f5f9;
-    }
-
-    .calc-btn.op {
-      background: var(--tosca-soft);
-      border-color: var(--tosca-border);
-      color: var(--tosca-dark);
-    }
-
-    .calc-btn.op:hover {
-      background: #ccfbf1;
-    }
-
-    .calc-btn.eq {
-      background: var(--orange-main);
-      border-color: var(--orange-main);
-      color: #ffffff;
-    }
-
-    .calc-btn.eq:hover {
-      background: var(--orange-hover);
-    }
-
-    .calc-btn.clr {
-      background: #fee2e2;
-      border-color: #fca5a5;
-      color: #991b1b;
-    }
-
-    .calc-copy-bar {
+    .choice-item {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
-    }
-
-    .calc-copy-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-right: 4px;
-    }
-
-    .btn-copy-target {
-      background: var(--tosca-dark);
-      color: #ffffff;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 700;
+      gap: 9px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s;
+      transition: border-color 0.15s, background 0.15s;
     }
 
-    .btn-copy-target:hover {
-      background: #0b5c55;
+    .choice-item:hover {
+      border-color: var(--tosca-main);
+      background: var(--tosca-soft);
     }
 
-    .calc-feedback {
-      font-size: 12.5px;
-      font-weight: 700;
+    .choice-item.checked {
+      border-color: var(--tosca-main);
+      background: #e6faf6;
       color: var(--tosca-dark);
-      min-height: 18px;
-      margin-top: 8px;
     }
 
     .btn-group {
@@ -963,47 +831,17 @@
       .dashboard-card {
         padding: 16px 14px;
       }
-      .salam-pembuka {
-        font-size: 15px;
-      }
-      .pesan-utama {
-        font-size: 13.5px;
-        text-align: left;
-      }
-      .doa-box,
-      .salam-penutup {
-        font-size: 14px;
-      }
-      .section-title {
-        font-size: 15px;
-      }
-      label {
-        font-size: 13px;
-      }
-      input,
-      select {
-        padding: 9px 11px;
-        font-size: 13.5px;
-      }
-      .field-caption {
-        font-size: 12px;
-      }
-      .rombel-box,
-      .calc-murid-box {
+      .task-card {
         padding: 14px 12px;
       }
-      .rombel-heading .rombel-main-title,
-      .calc-title {
-        font-size: 14px;
+      .task-card-title {
+        font-size: 14.5px;
       }
-      .rombel-heading .rombel-sub-title {
+      .sub-table {
         font-size: 12.5px;
       }
-      .calc-display-row {
-        grid-template-columns: 1fr;
-      }
-      .calc-keypad {
-        grid-template-columns: repeat(4, 1fr);
+      .choice-grid {
+        grid-template-columns: 1fr 1fr;
       }
       .btn-masuk,
       .btn-submit,
@@ -1066,8 +904,6 @@
       }
       .welcome-screen,
       .top-bar,
-      .rombel-box,
-      .calc-murid-box,
       .form-input-area,
       .btn-print,
       .summary-cards,
@@ -1250,12 +1086,12 @@
           </div>
 
           <div class="field">
-            <label for="nama">1. Nama</label>
+            <label class="field-label" for="nama">1. Nama</label>
             <input type="text" id="nama" placeholder="Tulis nama anda" />
           </div>
 
           <div class="field">
-            <label for="jabatan">2. Wali Kelas / Guru Bidang</label>
+            <label class="field-label" for="jabatan">2. Wali Kelas / Guru Bidang</label>
             <select id="jabatan">
               <option value="" disabled selected>-- Pilih Wali Kelas / Guru Bidang --</option>
               <option value="Walikelas">Walikelas</option>
@@ -1265,308 +1101,189 @@
 
           <div class="grid-2">
             <div class="field">
-              <label for="wa">3. Nomor WA</label>
+              <label class="field-label" for="wa">3. Nomor WA</label>
               <input type="text" id="wa" placeholder="Contoh: 0812xxxxxxxx" />
             </div>
             <div class="field">
-              <label for="jenis_bank">Jenis Bank</label>
+              <label class="field-label" for="jenis_bank">Jenis Bank</label>
               <input type="text" id="jenis_bank" placeholder="Contoh: BSI / BCA / BRI / Mandiri" />
             </div>
           </div>
 
           <div class="field">
-            <label for="rekening">4. Nomor Rekening</label>
+            <label class="field-label" for="rekening">4. Nomor Rekening</label>
             <input type="text" id="rekening" placeholder="Contoh: 7205xxxxxx" />
-          </div>
-
-          <div class="rombel-box">
-            <div class="rombel-heading">
-              <div class="rombel-main-title">DATA MURID TIAP ROMBEL — SDIT ALIA NURUL JIHADI</div>
-              <div class="rombel-sub-title">TP. 2026/2027</div>
-            </div>
-
-            <div class="rombel-scroll">
-              <table class="rombel-table">
-                <thead>
-                  <tr class="row-kelas">
-                    <th rowspan="3">Jenis</th>
-                    <th colspan="5">Kelas 1</th>
-                    <th colspan="4">Kelas 2</th>
-                    <th colspan="4">Kelas 3</th>
-                    <th colspan="4">Kelas 4</th>
-                    <th colspan="4">Kelas 5</th>
-                    <th colspan="4">Kelas 6</th>
-                    <th rowspan="3">Jumlah</th>
-                  </tr>
-                  <tr class="row-rombel">
-                    <th>1A</th>
-                    <th>1B</th>
-                    <th>1C</th>
-                    <th>1D</th>
-                    <th>1E</th>
-                    <th>2A</th>
-                    <th>2B</th>
-                    <th>2C</th>
-                    <th>2D</th>
-                    <th>3A</th>
-                    <th>3B</th>
-                    <th>3C</th>
-                    <th>3D</th>
-                    <th>4A</th>
-                    <th>4B</th>
-                    <th>4C</th>
-                    <th>4D</th>
-                    <th>5A</th>
-                    <th>5B</th>
-                    <th>5C</th>
-                    <th>5D</th>
-                    <th>6A</th>
-                    <th>6B</th>
-                    <th>6C</th>
-                    <th>6D</th>
-                  </tr>
-                  <tr class="row-walikelas">
-                    <th>Hasan</th>
-                    <th>Husein</th>
-                    <th>Aisyah</th>
-                    <th>Khodijah</th>
-                    <th>Maryam</th>
-                    <th>Kholid</th>
-                    <th>Bilal</th>
-                    <th>Zainab</th>
-                    <th>Hindun</th>
-                    <th>Ali</th>
-                    <th>Hamzah</th>
-                    <th>Fatimah</th>
-                    <th>Ruqoyyah</th>
-                    <th>Mu'adz</th>
-                    <th>Utsman</th>
-                    <th>U.Kultsum</th>
-                    <th>Shafiyyah</th>
-                    <th>Umar</th>
-                    <th>Zubair</th>
-                    <th>Hafshoh</th>
-                    <th>U.Salamah</th>
-                    <th>Abu Bakar</th>
-                    <th>Salman</th>
-                    <th>Asma'</th>
-                    <th>Khaulah</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="row-laki">
-                    <td class="col-jenis">Laki-laki</td>
-                    <td>27</td>
-                    <td>27</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>28</td>
-                    <td>28</td>
-                    <td></td>
-                    <td></td>
-                    <td>28</td>
-                    <td>25</td>
-                    <td></td>
-                    <td></td>
-                    <td>27</td>
-                    <td>26</td>
-                    <td></td>
-                    <td></td>
-                    <td>25</td>
-                    <td>19</td>
-                    <td></td>
-                    <td></td>
-                    <td>23</td>
-                    <td>21</td>
-                    <td></td>
-                    <td></td>
-                    <td class="col-jml-rombel">304</td>
-                  </tr>
-                  <tr class="row-perempuan">
-                    <td class="col-jenis">Perempuan</td>
-                    <td></td>
-                    <td></td>
-                    <td>22</td>
-                    <td>21</td>
-                    <td>21</td>
-                    <td></td>
-                    <td></td>
-                    <td>26</td>
-                    <td>27</td>
-                    <td></td>
-                    <td></td>
-                    <td>22</td>
-                    <td>22</td>
-                    <td></td>
-                    <td></td>
-                    <td>25</td>
-                    <td>24</td>
-                    <td></td>
-                    <td></td>
-                    <td>28</td>
-                    <td>28</td>
-                    <td></td>
-                    <td></td>
-                    <td>21</td>
-                    <td>20</td>
-                    <td class="col-jml-rombel">307</td>
-                  </tr>
-                  <tr class="row-jumlah-kosong">
-                    <td class="col-jenis">Jumlah</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr class="row-total-kelas">
-                    <td class="col-jenis">Total Kelas</td>
-                    <td colspan="5">118</td>
-                    <td colspan="4">109</td>
-                    <td colspan="4">97</td>
-                    <td colspan="4">102</td>
-                    <td colspan="4">100</td>
-                    <td colspan="4">85</td>
-                    <td>611</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr class="row-keseluruhan">
-                    <td class="col-jenis-foot">Keseluruhan</td>
-                    <td colspan="25">611</td>
-                    <td></td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-
-          <div class="calc-murid-box" id="calcMuridBox">
-            <div class="calc-header">
-              <h3 class="calc-title">🧮 Kalkulator Hitung Jumlah Murid</h3>
-            </div>
-            <div class="calc-subtitle">
-              Ketik atau tekan tombol untuk menjumlahkan jumlah murid dari beberapa rombel/kelas (contoh: <code>27+27+22</code>), lalu salin hasilnya langsung ke kolom beban kerja di bawah.
-            </div>
-
-            <div class="calc-display-row">
-              <input
-                type="text"
-                id="calcExpr"
-                class="calc-input-expr"
-                placeholder="Contoh: 27+27+22+21+21"
-                autocomplete="off"
-              />
-              <div class="calc-result-box">
-                <span class="calc-result-label">Hasil Murid:</span>
-                <span class="calc-result-val" id="calcResult">0</span>
-              </div>
-            </div>
-
-            <div class="calc-keypad">
-              <button type="button" class="calc-btn" data-val="7">7</button>
-              <button type="button" class="calc-btn" data-val="8">8</button>
-              <button type="button" class="calc-btn" data-val="9">9</button>
-              <button type="button" class="calc-btn op" data-val="+">+</button>
-              <button type="button" class="calc-btn op" data-val="-">-</button>
-              <button type="button" class="calc-btn clr" id="calcClear">C</button>
-
-              <button type="button" class="calc-btn" data-val="4">4</button>
-              <button type="button" class="calc-btn" data-val="5">5</button>
-              <button type="button" class="calc-btn" data-val="6">6</button>
-              <button type="button" class="calc-btn op" data-val="*">×</button>
-              <button type="button" class="calc-btn op" data-val="/">÷</button>
-              <button type="button" class="calc-btn clr" id="calcBackspace">⌫</button>
-
-              <button type="button" class="calc-btn" data-val="1">1</button>
-              <button type="button" class="calc-btn" data-val="2">2</button>
-              <button type="button" class="calc-btn" data-val="3">3</button>
-              <button type="button" class="calc-btn" data-val="0">0</button>
-              <button type="button" class="calc-btn" data-val="00">00</button>
-              <button type="button" class="calc-btn eq" id="calcEquals">=</button>
-            </div>
-
-            <div class="calc-copy-bar">
-              <span class="calc-copy-label">Salin hasil ke:</span>
-              <button type="button" class="btn-copy-target" data-target="koreksi_soal">
-                6. Mengoreksi Soal (siswa)
-              </button>
-              <button type="button" class="btn-copy-target" data-target="awas_praktek">
-                7. Mengawas Praktek (siswa)
-              </button>
-              <button type="button" class="btn-copy-target" data-target="isi_raport">
-                9. Mengisi Raport (siswa)
-              </button>
-            </div>
-            <div class="calc-feedback" id="calcFeedback"></div>
           </div>
 
           <hr class="divider" />
 
           <div class="section-title">
             <span>Rincian Beban Kerja SAS</span>
-            <span class="tag-orange">Hitung Otomatis</span>
+            <span class="tag-orange">Pilih &amp; Hitung Otomatis</span>
           </div>
 
-          <div class="grid-2">
-            <div class="field">
-              <label for="buat_soal">5. Membuat soal sebanyak</label>
-              <input type="number" id="buat_soal" min="0" value="0" />
-              <small class="field-caption">Isi dengan jumlah paket/naskah soal SAS yang dibuat (bukan jumlah butir soal), biarkan 0 jika tidak bertugas.</small>
+          <!-- 5. MEMBUAT SOAL (CHECKBOX MAPEL) -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <h3 class="task-card-title">5. Membuat soal sebanyak</h3>
+              <span class="task-badge-total" id="badgeBuatSoal">Jumlah: 0 Paket</span>
             </div>
-            <div class="field">
-              <label for="koreksi_soal">6. Mengoreksi soal sebanyak (siswa)</label>
-              <input type="number" id="koreksi_soal" min="0" value="0" />
-              <small class="field-caption">Isi dengan jumlah total siswa yang lembar jawabannya dikoreksi pada kegiatan SAS, biarkan 0 jika tidak ada.</small>
+            <div class="task-note">
+              Centang mata pelajaran yang naskah soal SAS-nya Anda buat. Setiap mapel yang dicentang dihitung 1 paket soal.
             </div>
-            <div class="field">
-              <label for="awas_praktek">7. Mengawas praktek sebanyak (siswa)</label>
-              <input type="number" id="awas_praktek" min="0" value="0" />
-              <small class="field-caption">Isi dengan jumlah siswa yang diawasi saat ujian praktik SAS sesuai penugasan, biarkan 0 jika tidak ada.</small>
-            </div>
-            <div class="field">
-              <label for="awas_ruang">8. Mengawas ruangan sebanyak</label>
-              <input type="number" id="awas_ruang" min="0" value="0" />
-              <small class="field-caption">Isi dengan berapa kali Anda bertugas mengawas ujian di dalam ruangan selama SAS (misalnya 2 atau 5 kali), biarkan 0 jika tidak bertugas.</small>
-            </div>
-            <div class="field">
-              <label for="isi_raport">9. Mengisi raport sebanyak (siswa)</label>
-              <input type="number" id="isi_raport" min="0" value="0" />
-              <small class="field-caption">Isi dengan jumlah siswa yang nilai/catatan rapor SAS-nya diinput dan diselesaikan, biarkan 0 jika tidak bertugas.</small>
-            </div>
-            <div class="field">
-              <label for="edit_packing">10. Editing soal dan Packing (rombel)</label>
-              <input type="number" id="edit_packing" min="0" value="0" />
-              <small class="field-caption">Isi dengan jumlah rombongan belajar (rombel) yang naskah soalnya di-edit dan di-packing untuk SAS, biarkan 0 jika tidak ada.</small>
+            <div class="choice-grid" id="mapelGrid"></div>
+            <div class="mapel-info-bar">
+              <div><strong>Jenis Mapel:</strong> <span id="jenisMapelText">-</span></div>
+              <div><strong>Total Paket Soal:</strong> <span id="totalBuatSoalText">0</span></div>
             </div>
           </div>
 
-          <div class="field">
-            <label for="guru_pendamping">11. Guru Pendamping</label>
-            <input type="number" id="guru_pendamping" min="0" value="0" />
-            <small class="field-caption">Isi dengan jumlah penugasan sebagai Guru Pendamping selama pelaksanaan SAS (misalnya 1 jika bertugas, atau 0 jika tidak bertugas).</small>
+          <!-- 6. MENGOREKSI SOAL (25 ROMBEL + BERAPA KALI) -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <h3 class="task-card-title">6. Mengoreksi soal sebanyak (siswa)</h3>
+              <span class="task-badge-total" id="badgeKoreksiSoal">Siswa Sebanyak: 0</span>
+            </div>
+            <div class="task-note">
+              Centang kelas yang dikoreksi. Jika mengajar lebih dari 1 mapel di kelas yang sama (misalnya Matematika dan Bahasa Inggris di 1C), isi kolom <strong>Berapa Kali</strong> sesuai jumlah mapel yang dikoreksi.
+            </div>
+            <div class="mini-table-wrap">
+              <table class="sub-table">
+                <thead>
+                  <tr>
+                    <th style="width:48px;">No</th>
+                    <th style="width:62px;">Pilih</th>
+                    <th>Kelas</th>
+                    <th style="width:115px;">Jumlah Siswa</th>
+                    <th style="width:115px;">Berapa Kali</th>
+                    <th style="width:115px;">Jumlah</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyKoreksi"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5" style="text-align:right;">Siswa Sebanyak</td>
+                    <td style="text-align:center;" id="footKoreksiTotal">0</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- 7. MENGAWAS PRAKTEK (25 ROMBEL + BERAPA KALI) -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <h3 class="task-card-title">7. Mengawas praktek sebanyak (siswa)</h3>
+              <span class="task-badge-total" id="badgeAwasPraktek">Siswa Sebanyak: 0</span>
+            </div>
+            <div class="task-note">
+              Centang kelas yang diawasi ujian praktiknya. Jika mengajar lebih dari 1 mapel praktik di kelas yang sama (misalnya PJOK dan Seni Rupa di 1C), isi kolom <strong>Berapa Kali</strong> sesuai jumlah mapel praktik.
+            </div>
+            <div class="mini-table-wrap">
+              <table class="sub-table">
+                <thead>
+                  <tr>
+                    <th style="width:48px;">No</th>
+                    <th style="width:62px;">Pilih</th>
+                    <th>Kelas</th>
+                    <th style="width:115px;">Jumlah Siswa</th>
+                    <th style="width:115px;">Berapa Kali</th>
+                    <th style="width:115px;">Jumlah</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyPraktek"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5" style="text-align:right;">Siswa Sebanyak</td>
+                    <td style="text-align:center;" id="footPraktekTotal">0</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- 8. MENGAWAS RUANGAN (PILIHAN ANGKA 0 - 10) -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <h3 class="task-card-title">8. Mengawas ruangan sebanyak</h3>
+              <span class="task-badge-total" id="badgeAwasRuang">Jumlah: 0 Kali</span>
+            </div>
+            <div class="task-note">
+              Pilih jumlah kali bertugas mengawas ruangan ujian SAS (angka 0 sampai 10).
+            </div>
+            <select id="awas_ruang">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <!-- 9. MENGISI RAPORT (25 ROMBEL CHECKBOX) -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <h3 class="task-card-title">9. Mengisi raport sebanyak (siswa)</h3>
+              <span class="task-badge-total" id="badgeIsiRaport">Siswa Sebanyak: 0</span>
+            </div>
+            <div class="task-note">
+              Centang kelas yang rapor SAS-nya Anda isi/selesaikan. Total siswa otomatis terhitung.
+            </div>
+            <div class="mini-table-wrap">
+              <table class="sub-table">
+                <thead>
+                  <tr>
+                    <th style="width:48px;">No</th>
+                    <th style="width:62px;">Pilih</th>
+                    <th>Kelas</th>
+                    <th style="width:130px;">Jumlah Siswa</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyRaport"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" style="text-align:right;">Siswa Sebanyak</td>
+                    <td style="text-align:center;" id="footRaportTotal">0</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- 10. EDITING SOAL DAN PACKING (KHUSUS KKG) -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <h3 class="task-card-title">10. Editing soal dan Packing (rombel) — Khusus KKG</h3>
+              <span class="task-badge-total" id="badgeEditPacking">Total Editing dan Packing: 0</span>
+            </div>
+            <div class="task-note">
+              Setiap pilihan KKG yang dicentang bernilai <strong>1</strong>; jika tidak dipilih maka bernilai <strong>0</strong>.
+            </div>
+            <div class="choice-grid" id="kkgGrid"></div>
+            <div class="mapel-info-bar">
+              <div><strong>Total Editing dan Packing:</strong> <span id="totalEditPackingText">0</span></div>
+            </div>
+          </div>
+
+          <!-- 11. GURU PENDAMPING -->
+          <div class="task-card">
+            <div class="task-card-header">
+              <h3 class="task-card-title">11. Guru Pendamping</h3>
+              <span class="task-badge-total" id="badgeGuruPendamping">Total Guru Pendamping: 0</span>
+            </div>
+            <div class="task-note">
+              Setiap pilihan Pendamping yang dicentang bernilai <strong>1</strong>; jika tidak dipilih maka bernilai <strong>0</strong>.
+            </div>
+            <div class="choice-grid" id="pendampingGrid"></div>
+            <div class="mapel-info-bar">
+              <div><strong>Total Guru Pendamping:</strong> <span id="totalGuruPendampingText">0</span></div>
+            </div>
           </div>
 
           <div class="btn-group">
@@ -1660,9 +1377,69 @@
       guru_pendamping: 150000
     };
 
+    const MAPEL_LIST = [
+      "AQIDAH",
+      "FIQH",
+      "BAHASA ARAB",
+      "SHOROF",
+      "SIROH & TARIKH",
+      "PKN",
+      "BAHASA INDONESIA",
+      "IPAS",
+      "SENI RUPA",
+      "MATEMATIKA",
+      "BAHASA INGGRIS"
+    ];
+
+    const ROMBEL_LIST = [
+      { kelas: "1A", siswa: 27 },
+      { kelas: "1B", siswa: 27 },
+      { kelas: "1C", siswa: 22 },
+      { kelas: "1D", siswa: 21 },
+      { kelas: "1E", siswa: 21 },
+      { kelas: "2A", siswa: 28 },
+      { kelas: "2B", siswa: 28 },
+      { kelas: "2C", siswa: 26 },
+      { kelas: "2D", siswa: 27 },
+      { kelas: "3A", siswa: 28 },
+      { kelas: "3B", siswa: 25 },
+      { kelas: "3C", siswa: 22 },
+      { kelas: "3D", siswa: 22 },
+      { kelas: "4A", siswa: 27 },
+      { kelas: "4B", siswa: 26 },
+      { kelas: "4C", siswa: 25 },
+      { kelas: "4D", siswa: 24 },
+      { kelas: "5A", siswa: 25 },
+      { kelas: "5B", siswa: 19 },
+      { kelas: "5C", siswa: 28 },
+      { kelas: "5D", siswa: 28 },
+      { kelas: "6A", siswa: 23 },
+      { kelas: "6B", siswa: 21 },
+      { kelas: "6C", siswa: 21 },
+      { kelas: "6D", siswa: 20 }
+    ];
+
+    const KKG_LIST = [
+      "KKG Rombel 1",
+      "KKG Rombel 2",
+      "KKG Rombel 3",
+      "KKG Rombel 4",
+      "KKG Rombel 5",
+      "KKG Rombel 6"
+    ];
+
+    const PENDAMPING_LIST = [
+      "Pendamping 1A",
+      "Pendamping 1B",
+      "Pendamping 1C",
+      "Pendamping 2A",
+      "Pendamping 2B",
+      "Pendamping 3A",
+      "Pendamping 3B"
+    ];
+
     let dataSiapKirim = null;
     let sudahTerkirim = false;
-    let nilaiKalkulatorTerakhir = 0;
 
     function masukDashboard() {
       const welcome = document.getElementById("welcomeScreen");
@@ -1680,112 +1457,209 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function evaluasiKalkulator() {
-      const exprInput = document.getElementById("calcExpr");
-      const resultEl = document.getElementById("calcResult");
-      const feedbackEl = document.getElementById("calcFeedback");
-      if (!exprInput || !resultEl) return 0;
-
-      let raw = exprInput.value.replace(/×/g, "*").replace(/÷/g, "/").trim();
-      if (!raw) {
-        nilaiKalkulatorTerakhir = 0;
-        resultEl.textContent = "0";
-        if (feedbackEl) feedbackEl.textContent = "";
-        return 0;
-      }
-
-      if (!/^[0-9+\-*/().\s]+$/.test(raw)) {
-        if (feedbackEl) feedbackEl.textContent = "⚠️ Gunakan hanya angka dan tanda +, -, ×, ÷.";
-        return nilaiKalkulatorTerakhir;
-      }
-
-      raw = raw.replace(/[+\-*/.\s]+$/, "");
-      if (!raw) {
-        nilaiKalkulatorTerakhir = 0;
-        resultEl.textContent = "0";
-        return 0;
-      }
-
-      try {
-        const hasil = Function('"use strict"; return (' + raw + ')')();
-        if (typeof hasil === "number" && isFinite(hasil)) {
-          const dibulatkan = Math.max(0, Math.round(hasil));
-          nilaiKalkulatorTerakhir = dibulatkan;
-          resultEl.textContent = dibulatkan.toLocaleString("id-ID");
-          if (feedbackEl) feedbackEl.textContent = "";
-          return dibulatkan;
-        }
-      } catch (e) {
-        // Abaikan saat ekspresi belum lengkap
-      }
-      return nilaiKalkulatorTerakhir;
-    }
-
-    function initKalkulatorMurid() {
-      const exprInput = document.getElementById("calcExpr");
-      const clearBtn = document.getElementById("calcClear");
-      const backBtn = document.getElementById("calcBackspace");
-      const eqBtn = document.getElementById("calcEquals");
-
-      document.querySelectorAll(".calc-btn[data-val]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          exprInput.value += btn.getAttribute("data-val");
-          evaluasiKalkulator();
-          exprInput.focus();
-        });
-      });
-
-      exprInput.addEventListener("input", evaluasiKalkulator);
-
-      exprInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          const val = evaluasiKalkulator();
-          exprInput.value = String(val);
-        }
-      });
-
-      clearBtn.addEventListener("click", () => {
-        exprInput.value = "";
-        evaluasiKalkulator();
-        exprInput.focus();
-      });
-
-      backBtn.addEventListener("click", () => {
-        exprInput.value = exprInput.value.slice(0, -1);
-        evaluasiKalkulator();
-        exprInput.focus();
-      });
-
-      eqBtn.addEventListener("click", () => {
-        const val = evaluasiKalkulator();
-        exprInput.value = String(val);
-        exprInput.focus();
-      });
-
-      document.querySelectorAll(".btn-copy-target").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const targetId = btn.getAttribute("data-target");
-          const targetInput = document.getElementById(targetId);
-          const feedbackEl = document.getElementById("calcFeedback");
-          const nilai = evaluasiKalkulator();
-          if (targetInput) {
-            targetInput.value = nilai;
-            if (feedbackEl) {
-              feedbackEl.textContent = `✅ Angka ${nilai} disalin ke "${btn.textContent.trim()}".`;
-            }
-          }
-        });
-      });
-    }
-
     function formatRupiah(angka) {
       return "Rp " + Number(angka || 0).toLocaleString("id-ID");
     }
 
-    function ambilAngka(id) {
-      const nilai = parseFloat(document.getElementById(id).value);
-      return isNaN(nilai) || nilai < 0 ? 0 : nilai;
+    function renderFormInteraktif() {
+      // 5. Mapel checkboxes
+      const mapelGrid = document.getElementById("mapelGrid");
+      mapelGrid.innerHTML = MAPEL_LIST.map((m, idx) => `
+        <label class="choice-item" id="lblMapel_${idx}">
+          <input type="checkbox" class="chk-input mapel-chk" data-mapel="${m}" />
+          <span>${idx + 1}. ${m}</span>
+        </label>
+      `).join("");
+
+      // 6 & 7. Rombel tables with "Berapa Kali"
+      ["koreksi", "praktek"].forEach((prefix) => {
+        const tbody = document.getElementById(prefix === "koreksi" ? "tbodyKoreksi" : "tbodyPraktek");
+        tbody.innerHTML = ROMBEL_LIST.map((r, idx) => `
+          <tr id="tr_${prefix}_${idx}">
+            <td style="text-align:center; font-weight:600;">${idx + 1}</td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="chk-input ${prefix}-chk" data-idx="${idx}" data-siswa="${r.siswa}" />
+            </td>
+            <td style="text-align:center; font-weight:700;">${r.kelas}</td>
+            <td style="text-align:center;">${r.siswa}</td>
+            <td style="text-align:center;">
+              <input type="number" min="1" value="1" class="kali-input ${prefix}-kali" data-idx="${idx}" />
+            </td>
+            <td style="text-align:center; font-weight:700;" id="sub_${prefix}_${idx}">0</td>
+          </tr>
+        `).join("");
+      });
+
+      // 9. Raport table
+      const tbodyRaport = document.getElementById("tbodyRaport");
+      tbodyRaport.innerHTML = ROMBEL_LIST.map((r, idx) => `
+        <tr id="tr_raport_${idx}">
+          <td style="text-align:center; font-weight:600;">${idx + 1}</td>
+          <td style="text-align:center;">
+            <input type="checkbox" class="chk-input raport-chk" data-idx="${idx}" data-siswa="${r.siswa}" />
+          </td>
+          <td style="text-align:center; font-weight:700;">${r.kelas}</td>
+          <td style="text-align:center; font-weight:700;">${r.siswa}</td>
+        </tr>
+      `).join("");
+
+      // 10. KKG checkboxes
+      const kkgGrid = document.getElementById("kkgGrid");
+      kkgGrid.innerHTML = KKG_LIST.map((item, idx) => `
+        <label class="choice-item" id="lblKkg_${idx}">
+          <input type="checkbox" class="chk-input kkg-chk" data-label="${item}" />
+          <span>${item}</span>
+        </label>
+      `).join("");
+
+      // 11. Pendamping checkboxes
+      const pendampingGrid = document.getElementById("pendampingGrid");
+      pendampingGrid.innerHTML = PENDAMPING_LIST.map((item, idx) => `
+        <label class="choice-item" id="lblPendamping_${idx}">
+          <input type="checkbox" class="chk-input pendamping-chk" data-label="${item}" />
+          <span>${item}</span>
+        </label>
+      `).join("");
+
+      // Attach listeners
+      document.querySelectorAll(".mapel-chk").forEach((chk, idx) => {
+        chk.addEventListener("change", () => {
+          document.getElementById(`lblMapel_${idx}`).classList.toggle("checked", chk.checked);
+          updateRingkasanBeban();
+        });
+      });
+
+      ["koreksi", "praktek"].forEach((prefix) => {
+        document.querySelectorAll(`.${prefix}-chk`).forEach((chk) => {
+          chk.addEventListener("change", updateRingkasanBeban);
+        });
+        document.querySelectorAll(`.${prefix}-kali`).forEach((inp) => {
+          inp.addEventListener("input", updateRingkasanBeban);
+        });
+      });
+
+      document.getElementById("awas_ruang").addEventListener("change", updateRingkasanBeban);
+
+      document.querySelectorAll(".raport-chk").forEach((chk) => {
+        chk.addEventListener("change", updateRingkasanBeban);
+      });
+
+      document.querySelectorAll(".kkg-chk").forEach((chk, idx) => {
+        chk.addEventListener("change", () => {
+          document.getElementById(`lblKkg_${idx}`).classList.toggle("checked", chk.checked);
+          updateRingkasanBeban();
+        });
+      });
+
+      document.querySelectorAll(".pendamping-chk").forEach((chk, idx) => {
+        chk.addEventListener("change", () => {
+          document.getElementById(`lblPendamping_${idx}`).classList.toggle("checked", chk.checked);
+          updateRingkasanBeban();
+        });
+      });
+
+      updateRingkasanBeban();
+    }
+
+    function hitungRombelKali(prefix) {
+      let totalSiswa = 0;
+      const chks = document.querySelectorAll(`.${prefix}-chk`);
+      chks.forEach((chk) => {
+        const idx = chk.getAttribute("data-idx");
+        const siswa = parseInt(chk.getAttribute("data-siswa"), 10) || 0;
+        const kaliInput = document.querySelector(`.${prefix}-kali[data-idx="${idx}"]`);
+        const tr = document.getElementById(`tr_${prefix}_${idx}`);
+        const subCell = document.getElementById(`sub_${prefix}_${idx}`);
+
+        let kali = parseInt(kaliInput.value, 10);
+        if (isNaN(kali) || kali < 1) kali = 1;
+
+        if (chk.checked) {
+          const subtotal = siswa * kali;
+          totalSiswa += subtotal;
+          if (subCell) subCell.textContent = subtotal;
+          if (tr) tr.classList.add("row-active");
+        } else {
+          if (subCell) subCell.textContent = "0";
+          if (tr) tr.classList.remove("row-active");
+        }
+      });
+      return totalSiswa;
+    }
+
+    function ambilNilaiBeban() {
+      const mapelTerpilih = [];
+      document.querySelectorAll(".mapel-chk:checked").forEach((chk) => {
+        mapelTerpilih.push(chk.getAttribute("data-mapel"));
+      });
+      const buatSoal = mapelTerpilih.length;
+
+      const koreksiSoal = hitungRombelKali("koreksi");
+      const awasPraktek = hitungRombelKali("praktek");
+      const awasRuang = parseInt(document.getElementById("awas_ruang").value, 10) || 0;
+
+      let isiRaport = 0;
+      document.querySelectorAll(".raport-chk").forEach((chk) => {
+        const idx = chk.getAttribute("data-idx");
+        const siswa = parseInt(chk.getAttribute("data-siswa"), 10) || 0;
+        const tr = document.getElementById(`tr_raport_${idx}`);
+        if (chk.checked) {
+          isiRaport += siswa;
+          if (tr) tr.classList.add("row-active");
+        } else {
+          if (tr) tr.classList.remove("row-active");
+        }
+      });
+
+      const kkgTerpilih = [];
+      document.querySelectorAll(".kkg-chk:checked").forEach((chk) => {
+        kkgTerpilih.push(chk.getAttribute("data-label"));
+      });
+      const editPacking = kkgTerpilih.length;
+
+      const pendampingTerpilih = [];
+      document.querySelectorAll(".pendamping-chk:checked").forEach((chk) => {
+        pendampingTerpilih.push(chk.getAttribute("data-label"));
+      });
+      const guruPendamping = pendampingTerpilih.length;
+
+      return {
+        buatSoal,
+        mapelTerpilih,
+        koreksiSoal,
+        awasPraktek,
+        awasRuang,
+        isiRaport,
+        editPacking,
+        kkgTerpilih,
+        guruPendamping,
+        pendampingTerpilih
+      };
+    }
+
+    function updateRingkasanBeban() {
+      const b = ambilNilaiBeban();
+
+      document.getElementById("badgeBuatSoal").textContent = `Jumlah: ${b.buatSoal} Paket`;
+      document.getElementById("jenisMapelText").textContent = b.mapelTerpilih.length > 0 ? b.mapelTerpilih.join(", ") : "-";
+      document.getElementById("totalBuatSoalText").textContent = b.buatSoal;
+
+      document.getElementById("badgeKoreksiSoal").textContent = `Siswa Sebanyak: ${b.koreksiSoal}`;
+      document.getElementById("footKoreksiTotal").textContent = b.koreksiSoal;
+
+      document.getElementById("badgeAwasPraktek").textContent = `Siswa Sebanyak: ${b.awasPraktek}`;
+      document.getElementById("footPraktekTotal").textContent = b.awasPraktek;
+
+      document.getElementById("badgeAwasRuang").textContent = `Jumlah: ${b.awasRuang} Kali`;
+
+      document.getElementById("badgeIsiRaport").textContent = `Siswa Sebanyak: ${b.isiRaport}`;
+      document.getElementById("footRaportTotal").textContent = b.isiRaport;
+
+      document.getElementById("badgeEditPacking").textContent = `Total Editing dan Packing: ${b.editPacking}`;
+      document.getElementById("totalEditPackingText").textContent = b.editPacking;
+
+      document.getElementById("badgeGuruPendamping").textContent = `Total Guru Pendamping: ${b.guruPendamping}`;
+      document.getElementById("totalGuruPendampingText").textContent = b.guruPendamping;
     }
 
     function setTombolKirimState(terkirim, sedangProses = false) {
@@ -1845,22 +1719,28 @@
       const bank = document.getElementById("jenis_bank").value.trim() || "-";
       const rekening = document.getElementById("rekening").value.trim() || "-";
 
-      const buatSoal = ambilAngka("buat_soal");
-      const koreksiSoal = ambilAngka("koreksi_soal");
-      const awasPraktek = ambilAngka("awas_praktek");
-      const awasRuang = ambilAngka("awas_ruang");
-      const isiRaport = ambilAngka("isi_raport");
-      const editPacking = ambilAngka("edit_packing");
-      const guruPendamping = ambilAngka("guru_pendamping");
+      const b = ambilNilaiBeban();
 
       const items = [
-        { label: "Pembuat Soal", jumlah: buatSoal, tarif: TARIF.buat_soal },
-        { label: "Mengoreksi Soal", jumlah: koreksiSoal, tarif: TARIF.koreksi_soal },
-        { label: "Mengawas Praktek", jumlah: awasPraktek, tarif: TARIF.awas_praktek },
-        { label: "Mengawas Ruangan", jumlah: awasRuang, tarif: TARIF.awas_ruang },
-        { label: "Mengisi Rapor", jumlah: isiRaport, tarif: TARIF.isi_raport },
-        { label: "Editing Soal dan Packing", jumlah: editPacking, tarif: TARIF.edit_packing },
-        { label: "Guru Pendamping", jumlah: guruPendamping, tarif: TARIF.guru_pendamping }
+        {
+          label: b.mapelTerpilih.length > 0 ? `Pembuat Soal (${b.mapelTerpilih.join(", ")})` : "Pembuat Soal",
+          jumlah: b.buatSoal,
+          tarif: TARIF.buat_soal
+        },
+        { label: "Mengoreksi Soal", jumlah: b.koreksiSoal, tarif: TARIF.koreksi_soal },
+        { label: "Mengawas Praktek", jumlah: b.awasPraktek, tarif: TARIF.awas_praktek },
+        { label: "Mengawas Ruangan", jumlah: b.awasRuang, tarif: TARIF.awas_ruang },
+        { label: "Mengisi Rapor", jumlah: b.isiRaport, tarif: TARIF.isi_raport },
+        {
+          label: b.kkgTerpilih.length > 0 ? `Editing Soal dan Packing (${b.kkgTerpilih.join(", ")})` : "Editing Soal dan Packing",
+          jumlah: b.editPacking,
+          tarif: TARIF.edit_packing
+        },
+        {
+          label: b.pendampingTerpilih.length > 0 ? `Guru Pendamping (${b.pendampingTerpilih.join(", ")})` : "Guru Pendamping",
+          jumlah: b.guruPendamping,
+          tarif: TARIF.guru_pendamping
+        }
       ];
 
       let total = 0;
@@ -1903,13 +1783,13 @@
         wa: wa !== "-" ? "'" + wa : "-",
         jenis_bank: bank,
         rekening: rekening !== "-" ? "'" + rekening : "-",
-        buat_soal: buatSoal,
-        koreksi_soal: koreksiSoal,
-        awas_praktek: awasPraktek,
-        awas_ruang: awasRuang,
-        isi_raport: isiRaport,
-        edit_packing: editPacking,
-        guru_pendamping: guruPendamping,
+        buat_soal: b.buatSoal,
+        koreksi_soal: b.koreksiSoal,
+        awas_praktek: b.awasPraktek,
+        awas_ruang: b.awasRuang,
+        isi_raport: b.isiRaport,
+        edit_packing: b.editPacking,
+        guru_pendamping: b.guruPendamping,
         total_mukafaah: total
       };
       sudahTerkirim = false;
@@ -1930,11 +1810,18 @@
         document.getElementById(id).value = "";
       });
       document.getElementById("jabatan").value = "";
-      ["buat_soal", "koreksi_soal", "awas_praktek", "awas_ruang", "isi_raport", "edit_packing", "guru_pendamping"].forEach((id) => {
-        document.getElementById(id).value = 0;
+      document.querySelectorAll("input[type='checkbox']").forEach((chk) => {
+        chk.checked = false;
       });
-      document.getElementById("calcExpr").value = "";
-      evaluasiKalkulator();
+      document.querySelectorAll(".choice-item.checked").forEach((lbl) => {
+        lbl.classList.remove("checked");
+      });
+      document.querySelectorAll(".kali-input").forEach((inp) => {
+        inp.value = 1;
+      });
+      document.getElementById("awas_ruang").value = "0";
+      updateRingkasanBeban();
+
       dataSiapKirim = null;
       sudahTerkirim = false;
       setTombolKirimState(false, false);
@@ -1942,7 +1829,7 @@
       document.getElementById("statusSimpan").textContent = "";
     }
 
-    initKalkulatorMurid();
+    renderFormInteraktif();
     document.getElementById("btnMasuk").addEventListener("click", masukDashboard);
     document.getElementById("btnKembali").addEventListener("click", kembaliSambutan);
     document.getElementById("btnHitung").addEventListener("click", hitungMukafaah);
